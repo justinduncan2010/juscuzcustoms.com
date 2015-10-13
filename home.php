@@ -20,7 +20,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 <?php
-$con = mysql_connect("sulley.cah.ucf.edu","ju655443","Jade7369!");
+$con = mysql_connect("sulley.cah.ucf.edu","USERNAME","PASSWORD");
 if (!$con) {
 die("Can not Connect: " . mysql_error());
 }
