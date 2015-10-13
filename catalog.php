@@ -185,7 +185,7 @@ $myNew = mysql_query($new,$con);
             <ul class="bestseller">
             <?php
 			$i=0;
-			$limit=4; 
+			$limit=6; 
 while(($row = mysql_fetch_array($myNew)) && ($i<=$limit)){
 	$i++;
 	echo "<li> <img width='50' height='50' src=" . $row['image_url'] . " alt='product' title='product'> <a class='productname' href='product.php'>" . $row['product_name'] . "</a><span class='procategory'>Furniture</span> <span class='price'>" . $row['price'] . "</span> </li>";
