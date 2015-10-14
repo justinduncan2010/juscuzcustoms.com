@@ -20,7 +20,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 <?php
-$con = mysql_connect("sulley.cah.ucf.edu","USERNAME","PASSWORD");
+$con = mysql_connect("localhost","root","Jade7369!");
 if (!$con) {
 die("Can not Connect: " . mysql_error());
 }
@@ -194,9 +194,10 @@ while(($row = mysql_fetch_array($myNew)) && ($i<=$limit)){
             </ul>
           </div>
         </aside>
+        <!-- Sidebar End-->
+		<!-- Category End-->
         
-        <!-- Sidebar End--> 
-        <!-- Category-->
+        
         <div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
         	 
           <!-- Category Products-->
@@ -205,32 +206,8 @@ while(($row = mysql_fetch_array($myNew)) && ($i<=$limit)){
 
             <div class="row">
               <div class=""> 
-                <!-- Sorting-->
-                <div class="sorting well">
-                  <form class=" form-inline pull-left">
-                    Sort By :
-                    <select class="span2">
-                      <option>Default</option>
-                      <option>Name</option>
-                      <option>Pirce</option>
-                      <option>Rating </option>
-                      <option>Color</option>
-                    </select>
-                    &nbsp;&nbsp;
-                    Show:
-                    <select class="span1">
-                      <option>10</option>
-                      <option>15</option>
-                      <option>20</option>
-                      <option>25</option>
-                      <option>30</option>
-                    </select>
-                  </form>
-                  <div class="btn-group pull-right">
-                    <button class="btn btn-orange" id="list"><i class="icon-th-list icon-white"></i> </button>
-                    <button class="btn" id="grid"><i class="icon-th"></i></button>
-                  </div>
-                </div>              
+                <!-- Sorting-->                 
+        	  </div>              
                 <!-- Category-->
                 <section id="categorygrid">
                   <ul class="thumbnails list row" style="display:block" >
@@ -260,18 +237,6 @@ while(($row = mysql_fetch_array($myNew)) && ($i<=$limit)){
                         </div>
                     </li>
                    <?php } ?>
-                  </ul>
-                  <ul class="thumbnails grid" style="display:none">
-                  	<?php
-                  		while(($row = mysql_fetch_array($myAll))&&($n<=$ten)){
-							$n++;
-							echo "<li class='span3'><a class='prdocutname' href='product.php'>" . $row['product_name'] . "</a>";
-                   			echo "<div class='thumbnail'><a href='product.php'><img alt='' src=" . $row['image_url'] . "></a>";
-                   			echo "<div class='price'>";
-                   			echo "<div class='pricenew'>" . $row['price'] . "</div>";
-                   			echo "<div class='rw-ui-container' data-urid=" . $row['product_id'] . "></div></div></div></li>"; 
-				   	}
-					?>										   
                   </ul>
                   <div class="pull-right">
                     <ul class="pagination">
