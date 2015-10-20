@@ -1,5 +1,5 @@
 <?php
-$con = mysql_connect("50.62.209.123","GoKnightsBitch","Knights4321!");
+$con = mysql_connect("sulley.cah.ucf.edu","ju655443","Jade7369!");
 if (!$con) {
 die("Can not Connect: " . mysql_error());
 }
