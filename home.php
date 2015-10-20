@@ -13,7 +13,7 @@
 <link href="css/prettyPhoto.css" rel="stylesheet" media="screen">
 <link href="css/portfolio.css" rel="stylesheet">
 <link rel="stylesheet" href="layerslider/css/layerslider.css" type="text/css">
-<link rel="stylesheet" href="layerslider/css/layersliderstyle.css" type="text/css">
+<link rel="stylesheet" href="layerslider/css/layersliderstyle.css" type="text/css"> <!--Alicia will be making a separate header and footer php file-->
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
