@@ -1,3 +1,11 @@
+<?php include("db_connect.php");
+   session_start();
+$_SESSION['view'] = 12;
+$_SESSION['sort'] = 'blank';
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,28 +21,18 @@
 <link href="css/prettyPhoto.css" rel="stylesheet" media="screen">
 <link href="css/portfolio.css" rel="stylesheet">
 <link rel="stylesheet" href="layerslider/css/layerslider.css" type="text/css">
-<link rel="stylesheet" href="layerslider/css/layersliderstyle.css" type="text/css">
-
+<link rel="stylesheet" href="layerslider/css/layersliderstyle.css" type="text/css"
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-<?php
-$con = mysql_connect("localhost","root","Jade7369!");
-if (!$con) {
-die("Can not Connect: " . mysql_error());
-}
-
-mysql_select_db("ju655443",$con);
-$all = 'SELECT * FROM products';
-$sql = 'SELECT * FROM products WHERE featured = "yes"';
-$new = 'SELECT * FROM products WHERE new = "yes"';
-$myAll = mysql_query($all,$con);
-$myData = mysql_query($sql,$con);
-$myNew = mysql_query($new,$con);
-?>
 </head>
 <body>
+<?php
+$page = (int) $_GET['page'];
+if ($page < 1) $page = 1;
+
+?>
 <!-- Header Start -->
 <header>
     <div class="headerstrip">
@@ -184,10 +182,12 @@ $myNew = mysql_query($new,$con);
             <h1 class="heading1"><span class="maintext"><i class="icon-bookmark"></i> Hot New Items</span></h1>
             <ul class="bestseller">
             <?php
-			$i=0;
-			$limit=6; 
-while(($row = mysql_fetch_array($myNew)) && ($i<=$limit)){
-	$i++;
+			$zero=0;
+			$limit=6;
+			$new = 'SELECT * FROM products WHERE new="yes"';
+			$myNew = mysql_query($new,$con);  
+while(($row = mysql_fetch_array($myNew)) && ($zero<=$limit)){
+	$zero++;
 	echo "<li> <img width='50' height='50' src=" . $row['image_url'] . " alt='product' title='product'> <a class='productname' href='product.php'>" . $row['product_name'] . "</a><span class='procategory'>Furniture</span> <span class='price'>" . $row['price'] . "</span> </li>";
 }
 ?>
@@ -205,17 +205,90 @@ while(($row = mysql_fetch_array($myNew)) && ($i<=$limit)){
                   <h1 class="heading1"><span class="maintext"> <i class="icon-money"></i> Catalog</span></h1>
 
             <div class="row">
-              <div class=""> 
-                <!-- Sorting-->                 
-        	  </div>              
+            <div class="">
+            <div class="sorting well">
+            
+            <?php (isset($_POST['sort'])) ? ($sort = $_POST['sort']) &&($_SESSION['sort']=$_POST['sort']) : $sort=$_SESSION['sort'];?>
+            <div class="pull-left">
+            <form id="sort_form" class="form-inline" method="post" onchange="change2()">
+            Sort By:
+                <select id="sort" name="sort" class="span2">
+                  <option <?php if ($sort == 'blank' ) echo 'selected' ; ?> value='blank'>--</option>
+                  <option <?php if ($sort == 'Name' ) echo 'selected' ; ?> value='Name'>Name: A-Z</option>
+                  <option <?php if ($sort == 'Price' ) echo 'selected' ; ?> value='Price'>Price: Low to high</option>
+                </select>
+            </form>
+            <?php 
+				if($sort=='Name'){
+					
+                    $all = "SELECT * FROM products
+                     ORDER BY product_name ASC ";
+                }
+
+                elseif($sort=='Price'){
+                    $all = "SELECT * FROM products
+                     ORDER BY cost ASC";
+                }
+
+                else{
+                    $all = "SELECT * FROM products";
+                }
+				
+				$featured = 'SELECT * FROM products WHERE featured = "yes"';
+				$new = 'SELECT * FROM products WHERE new = "yes"';
+				$myFeatured = mysql_query($featured,$con);
+				$myNew = mysql_query($new,$con);
+				$myAll = mysql_query($all,$con);
+				
+				$sort = 'blank';
+				$page = (int) $_GET['page'];
+                if ($page < 1) $page = 1;
+				$resultsPerPage = $_SESSION['view'];
+                $startResults = ($page - 1) * $resultsPerPage;
+                $numberOfRows = mysql_num_rows(mysql_query('SELECT * FROM products'));
+                $totalPages = ceil($numberOfRows / $resultsPerPage);
+                ?>
+            
+        	</div>
+        		<!-- amount of products sidebar -->
+                 
+                <?php
+				
+				((isset($_POST['view'])) ? ($view = $_POST['view'])&&($_SESSION['view']=$_POST['view']) : $view=$_SESSION['view']);
+				
+				?>
+                <div class="pull-right">
+                
+                <form id="view_form" method="post" onchange="change()" class="pull-right">
+                View:
+                    <select class="span1" id="view" name="view">
+                      <option <?php if ($view == 12 ) echo 'selected' ; ?> value="12">12</option>
+                      <option <?php if ($view == 24 ) echo 'selected' ; ?> value="24">24</option>
+                      <option <?php if ($view == 36 ) echo 'selected' ; ?> value="36">36</option>
+                    </select>
+                    <?php 
+			
+						$last = "SELECT product_id FROM products ORDER BY product_id DESC";			
+            			$myLast = mysql_query($last,$con);
+            			$amount = mysql_fetch_array($myLast);
+
+                        print"1-".($view)." of ".$amount['product_id']."\n";
+                    
+            		?>
+                </form>
+                </div>
+            <!-- amount of items to view END -->
+         </div>
+         <!-- sort by and view number of items div END -->            
                 <!-- Category-->
                 <section id="categorygrid">
                   <ul class="thumbnails list row" style="display:block" >
                   <?php
-				  $n=0;
-				  $ten=9;
-                        while(($row = mysql_fetch_array($myAll))&&($n<=$ten)){
-							$n++;
+if($view==24){
+				  $zero=0;
+				  $twenty_four=23;
+                        while(($row = mysql_fetch_array($myAll))&&($zero<=$twenty_four)){
+							$zero++;
 				  ?>
                     <li>
                       <div class="thumbnail">
@@ -236,18 +309,108 @@ while(($row = mysql_fetch_array($myNew)) && ($i<=$limit)){
                          
                         </div>
                     </li>
-                   <?php } ?>
+                   <?php } }
+elseif($view==36){
+					   $zero=0;
+					   $thirty_six=35;
+						
+					/* While loop sending back 36 item view */
+                       while(($row = mysql_fetch_array($myAll))&&($zero<=$thirty_six)){
+							$zero++;
+				   ?>
+                    <li>
+                      <div class="thumbnail">
+                        <div class="row">
+						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php'><img alt='' src=" . $row['image_url'] . "></a> </div>";
+                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php'>" . $row['product_name'] . "</a>";
+                              echo "<div class='productdiscrption'>" . $row['description'] . "<br></div>";
+                              echo "<div class='price'>";
+                              echo "<div class='pricenew'>" . $row['price'] . "</div>";
+                              echo "<div class='ratingstar'>";
+                              echo "<div class='rw-ui-container' data-urid=" . $row['product_id'] . "></div>"; ?>
+                              		</div>
+                                    <a  class='btn btn-orange btn-large addtocartbutton pull-left'>Add to Cart</a>
+                            	</div>					
+                            </div>
+                            
+                          </div>
+                         
+                        </div>
+                    </li>
+                   <?php } }
+else{
+					   	$view=12;
+						$twelve=11;
+						$zero=0;
+						
+						/* While loop sending back 12 item view */
+                        while(($row = mysql_fetch_array($myAll))&&($zero<=$twelve)){
+							$zero++;
+				  ?>
+                    <li>
+                      <div class="thumbnail">
+                        <div class="row">
+						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php'><img alt='' src=" . $row['image_url'] . "></a> </div>";
+                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php'>" . $row['product_name'] . "</a>";
+                              echo "<div class='productdiscrption'>" . $row['description'] . "<br></div>";
+                              echo "<div class='price'>";
+                              echo "<div class='pricenew'>" . $row['price'] . "</div>";
+                              echo "<div class='ratingstar'>";
+                              echo "<div class='rw-ui-container' data-urid=" . $row['product_id'] . "></div>"; ?>
+                              		</div>
+                                    <a  class='btn btn-orange btn-large addtocartbutton pull-left'>Add to Cart</a>
+                            	</div>					
+                            </div>
+                            
+                          </div>
+                         
+                        </div>
+                    </li>
+                   <?php } } ?>
                   </ul>
                   <div class="pull-right">
-                    <ul class="pagination">
-                      <li><a href="#">Prev</a> </li>
-                      <li class="active"> <a href="#">1</a> </li>
-                      <li><a href="#">2</a> </li>
-                      <li><a href="#">3</a> </li>
-                      <li><a href="#">4</a> </li>
-                      <li><a href="#">Next</a> </li>
-                    </ul>
-                  </div>
+                	<div class="row">
+                <ul>
+                    <li>
+                    <?php
+                        if($page > 1)
+                        echo '<a href="?page='.($page - 1).'">Prev</a>'; 
+                    ?>
+                    </li>
+                   
+                    <li>
+                    <?php  for($i = 1; $i <= $totalPages; $i++)
+                        {
+                            if($i == $page){
+                              echo '<strong>'.$i.'</strong>&nbsp';
+                            }
+                            else{
+                              echo '<a href="?page='.$i.'">'.$i.'</a>&nbsp';
+                            }
+                        } 
+                    ?>
+                    </li>
+
+                   <li>
+                    <?php
+                        echo '<a href="?page='.($page + 1).'">Next</a>'; 
+                    ?>
+                    </li>
+                </ul>
+
+
+            
+                 <?php  
+                    if(($startResults+$view)>($amount['product_id'])){
+                     print " ".($startResults+1)."-".($amount['product_id'])." of ".$amount['product_id']."\n";
+                    }
+                    else{
+                        print " ".($startResults+1)."-".($startResults+$view)." of ".$amount['product_id']."\n";
+                    }
+                 ?>
+           
+        </div>
+       </div>
                 </section>
               </div>
             </div>
@@ -394,7 +557,20 @@ while(($row = mysql_fetch_array($myNew)) && ($i<=$limit)){
     rw.id = id; rw.async = true; rw.type = "text/javascript";
     rw.src = p + "//" + a + "external" + f + ".js?ck=" + ck;
     s.parentNode.insertBefore(rw, s);
-    }(document, new Date(), "script", "rating-widget.com/"));</script>
+    }(document, new Date(), "script", "rating-widget.com/"));
+    
+	
+	function change(){
+    	document.getElementById("view_form").submit();
+		
+	}
+
+	function change2(){
+    	document.getElementById("sort_form").submit();
+		
+	}
+    
+    </script>
 <?php
 mysql_close($con);
 ?>

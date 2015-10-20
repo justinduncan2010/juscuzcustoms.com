@@ -502,7 +502,14 @@ ul.bestseller li:hover { }
 .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus { background-color: #03956D; border-color: #03956D; color: #fff }
 /* sorting*/
 .sorting { overflow:auto; padding:10px; margin-bottom:40px; }
-.sorting form { margin:0px }
+
+.sorting form {
+	margin: 0px;
+}
+#category .sorting.well .item_numbers {
+	display: inline;
+}
+
 
 /* listview*/
 .list { display:none }
