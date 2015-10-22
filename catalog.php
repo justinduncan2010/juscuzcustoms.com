@@ -1,8 +1,8 @@
 <?php include("db_connect.php");
-   session_start();
+session_start();
 $_SESSION['view'] = 12;
 $_SESSION['sort'] = 'blank';
-
+	
 ?>
 
 
@@ -28,11 +28,6 @@ $_SESSION['sort'] = 'blank';
     <![endif]-->
 </head>
 <body>
-<?php
-$page = (int) $_GET['page'];
-if ($page < 1) $page = 1;
-
-?>
 <!-- Header Start -->
 <header>
     <div class="headerstrip">
@@ -218,20 +213,39 @@ while(($row = mysql_fetch_array($myNew)) && ($zero<=$limit)){
                   <option <?php if ($sort == 'Price' ) echo 'selected' ; ?> value='Price'>Price: Low to high</option>
                 </select>
             </form>
-            <?php 
+            <?php
+				
+				$view = $_SESSION['view'];
+		
+	
+				
+				$page = (int) $_GET['page'];
+				if($page < 1) {$page = 1;}	
+				
+		
+				
+				$startResults = ($page - 1) * $view;
+				
+				
+                
+                $numberOfRows = mysql_num_rows(mysql_query('SELECT * FROM products'));
+                $totalPages = ceil($numberOfRows / $view);
+				
+				 
 				if($sort=='Name'){
 					
                     $all = "SELECT * FROM products
-                     ORDER BY product_name ASC ";
+                     ORDER BY product_name ASC LIMIT $startResults, $view";
                 }
 
                 elseif($sort=='Price'){
                     $all = "SELECT * FROM products
-                     ORDER BY cost ASC";
+                     ORDER BY cost ASC LIMIT $startResults, $view";
                 }
 
                 else{
-                    $all = "SELECT * FROM products";
+                    $all = "SELECT * FROM products LIMIT $startResults, $view";
+					
                 }
 				
 				$featured = 'SELECT * FROM products WHERE featured = "yes"';
@@ -240,13 +254,6 @@ while(($row = mysql_fetch_array($myNew)) && ($zero<=$limit)){
 				$myNew = mysql_query($new,$con);
 				$myAll = mysql_query($all,$con);
 				
-				$sort = 'blank';
-				$page = (int) $_GET['page'];
-                if ($page < 1) $page = 1;
-				$resultsPerPage = $_SESSION['view'];
-                $startResults = ($page - 1) * $resultsPerPage;
-                $numberOfRows = mysql_num_rows(mysql_query('SELECT * FROM products'));
-                $totalPages = ceil($numberOfRows / $resultsPerPage);
                 ?>
             
         	</div>
@@ -268,11 +275,15 @@ while(($row = mysql_fetch_array($myNew)) && ($zero<=$limit)){
                     </select>
                     <?php 
 			
-						$last = "SELECT product_id FROM products ORDER BY product_id DESC";			
+						$last = "SELECT product_id FROM products ORDER BY product_id DESC";
             			$myLast = mysql_query($last,$con);
             			$amount = mysql_fetch_array($myLast);
-
-                        print"1-".($view)." of ".$amount['product_id']."\n";
+						if(($startResults+$view)>($amount['product_id'])){
+                     print " ".($startResults+1)."-".$amount['product_id']." of ".$amount['product_id']."\n";
+                    }
+                    else{
+                        print " ".($startResults+1)."-".($startResults+$view)." of ".$amount['product_id']."\n";
+                    }
                     
             		?>
                 </form>
