@@ -180,10 +180,11 @@ $_SESSION['sort'] = 'blank';
 			$zero=0;
 			$limit=6;
 			$new = 'SELECT * FROM products WHERE new="yes"';
-			$myNew = mysql_query($new,$con);  
-while(($row = mysql_fetch_array($myNew)) && ($zero<=$limit)){
+			$myNew = $mysqli->query($new);
+			//$myNew = mysql_query($new,$con);  
+while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
 	$zero++;
-	echo "<li> <img width='50' height='50' src=" . $row['image_url'] . " alt='product' title='product'> <a class='productname' href='product.php'>" . $row['product_name'] . "</a><span class='procategory'>Furniture</span> <span class='price'>" . $row['price'] . "</span> </li>";
+	echo "<li> <img width='50' height='50' src=" .$row->image_url. " alt='product' title='product'> <a class='productname' href='product.php'>" .$row->product_name. "</a><span class='procategory'>Furniture</span> <span class='price'>" . $row->price. "</span> </li>";
 }
 ?>
             </ul>
@@ -228,7 +229,7 @@ while(($row = mysql_fetch_array($myNew)) && ($zero<=$limit)){
 				
 				
                 
-                $numberOfRows = mysql_num_rows(mysql_query('SELECT * FROM products'));
+                $numberOfRows = mysqli_num_rows($mysqli->query('SELECT * FROM products'));
                 $totalPages = ceil($numberOfRows / $view);
 				
 				 
@@ -248,11 +249,8 @@ while(($row = mysql_fetch_array($myNew)) && ($zero<=$limit)){
 					
                 }
 				
-				$featured = 'SELECT * FROM products WHERE featured = "yes"';
 				$new = 'SELECT * FROM products WHERE new = "yes"';
-				$myFeatured = mysql_query($featured,$con);
-				$myNew = mysql_query($new,$con);
-				$myAll = mysql_query($all,$con);
+				$myAll = $mysqli->query($all)
 				
                 ?>
             
@@ -276,13 +274,13 @@ while(($row = mysql_fetch_array($myNew)) && ($zero<=$limit)){
                     <?php 
 			
 						$last = "SELECT product_id FROM products ORDER BY product_id DESC";
-            			$myLast = mysql_query($last,$con);
-            			$amount = mysql_fetch_array($myLast);
-						if(($startResults+$view)>($amount['product_id'])){
-                     print " ".($startResults+1)."-".$amount['product_id']." of ".$amount['product_id']."\n";
+            			$myLast = $mysqli->query($last);
+            			$amount = $myLast->fetch_object();
+                        if(($startResults+$view)>($amount->product_id)){
+                     print " ".($startResults+1)."-".($amount->product_id)." of ".$amount->product_id."\n";
                     }
                     else{
-                        print " ".($startResults+1)."-".($startResults+$view)." of ".$amount['product_id']."\n";
+                        print " ".($startResults+1)."-".($startResults+$view)." of ".$amount->product_id."\n";
                     }
                     
             		?>
@@ -298,19 +296,19 @@ while(($row = mysql_fetch_array($myNew)) && ($zero<=$limit)){
 if($view==24){
 				  $zero=0;
 				  $twenty_four=23;
-                        while(($row = mysql_fetch_array($myAll))&&($zero<=$twenty_four)){
+                        while(($row = $myAll->fetch_object())&&($zero<=$twenty_four)){
 							$zero++;
 				  ?>
                     <li>
                       <div class="thumbnail">
                         <div class="row">
-						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php'><img alt='' src=" . $row['image_url'] . "></a> </div>";
-                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php'>" . $row['product_name'] . "</a>";
-                              echo "<div class='productdiscrption'>" . $row['description'] . "<br></div>";
+						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php'><img alt='' src=" . $row->image_url. "></a> </div>";
+                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php'>" .$row->product_name. "</a>";
+                              echo "<div class='productdiscrption'>" .$row->description. "<br></div>";
                               echo "<div class='price'>";
-                              echo "<div class='pricenew'>" . $row['price'] . "</div>";
+                              echo "<div class='pricenew'>" .$row->price. "</div>";
                               echo "<div class='ratingstar'>";
-                              echo "<div class='rw-ui-container' data-urid=" . $row['product_id'] . "></div>"; ?>
+                              echo "<div class='rw-ui-container' data-urid=" . $row->product_id. "></div>"; ?>
                               		</div>
                                     <a  class='btn btn-orange btn-large addtocartbutton pull-left'>Add to Cart</a>
                             	</div>					
@@ -326,19 +324,19 @@ elseif($view==36){
 					   $thirty_six=35;
 						
 					/* While loop sending back 36 item view */
-                       while(($row = mysql_fetch_array($myAll))&&($zero<=$thirty_six)){
+                       while(($row = $myAll->fetch_object())&&($zero<=$thirty_six)){
 							$zero++;
 				   ?>
                     <li>
                       <div class="thumbnail">
                         <div class="row">
-						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php'><img alt='' src=" . $row['image_url'] . "></a> </div>";
-                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php'>" . $row['product_name'] . "</a>";
-                              echo "<div class='productdiscrption'>" . $row['description'] . "<br></div>";
+						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php'><img alt='' src=" . $row->image_url. "></a> </div>";
+                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php'>" .$row->product_name. "</a>";
+                              echo "<div class='productdiscrption'>" .$row->description. "<br></div>";
                               echo "<div class='price'>";
-                              echo "<div class='pricenew'>" . $row['price'] . "</div>";
+                              echo "<div class='pricenew'>" .$row->price. "</div>";
                               echo "<div class='ratingstar'>";
-                              echo "<div class='rw-ui-container' data-urid=" . $row['product_id'] . "></div>"; ?>
+                              echo "<div class='rw-ui-container' data-urid=" . $row->product_id. "></div>"; ?>
                               		</div>
                                     <a  class='btn btn-orange btn-large addtocartbutton pull-left'>Add to Cart</a>
                             	</div>					
@@ -355,19 +353,19 @@ else{
 						$zero=0;
 						
 						/* While loop sending back 12 item view */
-                        while(($row = mysql_fetch_array($myAll))&&($zero<=$twelve)){
+                        while(($row = $myAll->fetch_object())&&($zero<=$twelve)){
 							$zero++;
 				  ?>
                     <li>
                       <div class="thumbnail">
                         <div class="row">
-						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php'><img alt='' src=" . $row['image_url'] . "></a> </div>";
-                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php'>" . $row['product_name'] . "</a>";
-                              echo "<div class='productdiscrption'>" . $row['description'] . "<br></div>";
+						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php'><img alt='' src=" . $row->image_url. "></a> </div>";
+                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php'>" .$row->product_name. "</a>";
+                              echo "<div class='productdiscrption'>" .$row->description. "<br></div>";
                               echo "<div class='price'>";
-                              echo "<div class='pricenew'>" . $row['price'] . "</div>";
+                              echo "<div class='pricenew'>" .$row->price. "</div>";
                               echo "<div class='ratingstar'>";
-                              echo "<div class='rw-ui-container' data-urid=" . $row['product_id'] . "></div>"; ?>
+                              echo "<div class='rw-ui-container' data-urid=" . $row->product_id. "></div>"; ?>
                               		</div>
                                     <a  class='btn btn-orange btn-large addtocartbutton pull-left'>Add to Cart</a>
                             	</div>					
@@ -412,11 +410,11 @@ else{
 
             
                  <?php  
-                    if(($startResults+$view)>($amount['product_id'])){
-                     print " ".($startResults+1)."-".($amount['product_id'])." of ".$amount['product_id']."\n";
+                    if(($startResults+$view)>($amount->product_id)){
+                     print " ".($startResults+1)."-".($amount->product_id)." of ".$amount->product_id."\n";
                     }
                     else{
-                        print " ".($startResults+1)."-".($startResults+$view)." of ".$amount['product_id']."\n";
+                        print " ".($startResults+1)."-".($startResults+$view)." of ".$amount->product_id."\n";
                     }
                  ?>
            

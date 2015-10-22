@@ -1,18 +1,9 @@
 <?php
-$con = mysql_connect("sulley.cah.ucf.edu","ju655443","Jade7369!");
-if (!$con) {
-die("Can not Connect: " . mysql_error());
-}
+$mysqli = new mysqli('sulley.cah.ucf.edu', 'ju655443', 'Jade7369!', 'ju655443');  
 
-mysql_select_db("ju655443",$con);
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
 ?>
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
-
-<body>
-</body>
-</html>
