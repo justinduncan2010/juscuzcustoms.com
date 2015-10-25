@@ -1,8 +1,12 @@
 <?php include("db_connect.php");
-session_start();
+   session_start();
 $_SESSION['view'] = 12;
 $_SESSION['sort'] = 'blank';
+<<<<<<< HEAD
                                         
+=======
+
+>>>>>>> parent of 550560d... pagination working
 ?>
 
 
@@ -28,6 +32,11 @@ $_SESSION['sort'] = 'blank';
     <![endif]-->
 </head>
 <body>
+<?php
+$page = (int) $_GET['page'];
+if ($page < 1) $page = 1;
+
+?>
 <!-- Header Start -->
 <header>
     <div class="headerstrip">
@@ -271,6 +280,7 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
                   <option <?php if ($sort == 'Price' ) echo 'selected' ; ?> value='Price'>Price: Low to high</option>
                 </select>
             </form>
+<<<<<<< HEAD
             <?php
 				
 				$view = $_SESSION['view'];
@@ -290,25 +300,34 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
                 $totalPages = ceil($numberOfRows / $view);
 				
 				 
+=======
+            <?php 
+>>>>>>> parent of 550560d... pagination working
 				if($sort=='Name'){
 					
                     $all = "SELECT * FROM products
-                     ORDER BY product_name ASC LIMIT $startResults, $view";
+                     ORDER BY product_name ASC ";
                 }
 
                 elseif($sort=='Price'){
                     $all = "SELECT * FROM products
-                     ORDER BY cost ASC LIMIT $startResults, $view";
+                     ORDER BY cost ASC";
                 }
 
                 else{
-                    $all = "SELECT * FROM products LIMIT $startResults, $view";
-					
+                    $all = "SELECT * FROM products";
                 }
 				
 				$new = 'SELECT * FROM products WHERE new = "yes"';
 				$myAll = $mysqli->query($all)
 				
+				$sort = 'blank';
+				$page = (int) $_GET['page'];
+                if ($page < 1) $page = 1;
+				$resultsPerPage = $_SESSION['view'];
+                $startResults = ($page - 1) * $resultsPerPage;
+                $numberOfRows = mysql_num_rows(mysql_query('SELECT * FROM products'));
+                $totalPages = ceil($numberOfRows / $resultsPerPage);
                 ?>
             
         	</div>
@@ -330,6 +349,7 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
                     </select>
                     <?php 
 			
+<<<<<<< HEAD
 						$last = "SELECT product_id FROM products ORDER BY product_id DESC";
             			$myLast = $mysqli->query($last);
             			$amount = $myLast->fetch_object();
@@ -339,6 +359,13 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
                     else{
                         print " ".($startResults+1)."-".($startResults+$view)." of ".$amount->product_id."\n";
                     }
+=======
+						$last = "SELECT product_id FROM products ORDER BY product_id DESC";			
+            			$myLast = mysql_query($last,$con);
+            			$amount = mysql_fetch_array($myLast);
+
+                        print"1-".($view)." of ".$amount['product_id']."\n";
+>>>>>>> parent of 550560d... pagination working
                     
             		?>
                 </form>
