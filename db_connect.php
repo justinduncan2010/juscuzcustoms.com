@@ -6,5 +6,4 @@ if (mysqli_connect_errno())
   {
   echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
-mysql_select_db("ju655443",$con);
 ?>
