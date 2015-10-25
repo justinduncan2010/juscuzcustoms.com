@@ -2,7 +2,7 @@
 session_start();
 $_SESSION['view'] = 12;
 $_SESSION['sort'] = 'blank';
-	
+                                        
 ?>
 
 
@@ -37,6 +37,7 @@ $_SESSION['sort'] = 'blank';
             <div class="pull-right">
                 <div class="navbar" id="topnav">
                     <div class="navbar-inner">
+                    <!-- Sign-in Modal popup window -->
                     	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
           						<div class="modal-dialog">
             						<div class="modal-content">
@@ -47,33 +48,89 @@ $_SESSION['sort'] = 'blank';
               							<!-- contents of Sign-in modal -->
               							<div class="modal-body"> 
               								<div class="form-group">
+                                            	<form method="post" action="">
                     							<label class="control-label" >Username<span class="red">*</span></label>
                     							<div class="controls">
-                      								<input type="text" class=""  value="">
+                      								<input name="username" id="username" type="text" placeholder="Username or Email"/>
                     							</div>
                   							</div>
                   							<div class="form-group">
                     							<label class="control-label" >Password<span class="red">*</span></label>
                     							<div class="controls">
-                      								<input type="text" class=""  value="">
+                      								<input name="password" id="password" type="password" placeholder="Password"/>
                     							</div>
                   							</div>
               							</div>
               							<div class="modal-footer">
+                                        <?php 
+											if(isset($_POST['submit']) && (!isset($_SESSION['logged_in']))) {
+										// query to select all users/passwords
+											$select_users = "SELECT * FROM users";
+											$select_users_result = $mysqli->query($select_users);
+											
+										if($mysqli->error) {
+												print "Select query error!  Message: ".$mysqli->error;
+											}
+										
+											while($row = $select_users_result->fetch_object()) {
+												if ((($_POST['username']) == ($row->username)) && (md5($_POST['password']) == ($row->password))) {
+													// check if user input = a record in the database
+													$_SESSION['logged_in']              = true;
+													$_SESSION['logged_in_user']         = $row->username;
+													$_SESSION['logged_in_firstname']    = $row->first_name;
+													$_SESSION['logged_in_lastname']     = $row->last_name;
+													$_SESSION['logged_in_user_id']      = $row->user_id;
+													$_SESSION['logged_in_user_access']  = $row->access_level;
+												} 
+												elseif((($_POST['username']) != ($row->username)) && (md5($_POST['password']) != ($row->password))){
+												
+												?>
+                                                
+                                                <h4 class="red">Sorry, Invalid username or password</h4>
+												<?php break;
+												}
+											}
+										}
+										?>
                 							<button type="button" class="btn btn-orange" data-dismiss="modal">Cancel</button>
-                							<button type="button" class="btn btn-primary">Sign-in</button>
+                                            <input name="submit" id="submit" type="submit" class="btn btn-primary" value="Sign-in" />
+                                            </form>
               							</div>
             						</div>
-            						<!-- /.modal-content --> 
+            						<!-- End of .modal-content --> 
           						</div>
-          						<!-- /.modal-dialog --> 
+          						<!-- End of.modal-dialog --> 
         					</div>
-        					<!-- /.modal -->
+        					<!-- End of .modal -->
                         <ul class="nav" >
+                        	<?php 
+							if(!isset($_SESSION['logged_in'])) { 
+							?>
+                            
                         	<li class="text-nopad text-center"><a href="register.php">Sign-up</a></li>
                             <li class="text-nopad"><p>or</p></li>
                         	<li class="text-nopad"><a href="#myModal" data-toggle="modal"> &nbsp; login</a></li>
                             <li class="dropdown hover carticon "> <a href="cart.php" class="dropdown-toggle" > <i class="icon-shopping-cart font18"></i> Shopping Cart <span class="label label-orange font14">2 item(s)</span> - $1,790.00 <b class="caret"></b></a>
+                            
+                            <?php
+							}else if(($_SESSION['logged_in_user_access'] == "admin")) {
+							print "<li class='text-nopad'><p>not &nbsp;".$_SESSION['logged_in_firstname']."?</p></li>"; ?>
+                        	<li class="text-nopad"><a href="logout.php"> &nbsp; logout</a></li>
+                            <li class="text-nopad"><a href="admin.php"> &nbsp; To Admin Page</a></li>
+                            
+                            <?php 
+							}elseif(($_SESSION['logged_in_user_access'] == "customer")){
+							?>
+                            
+							<?php echo "<li class='text-nopad text-center'>Welcome".$_SESSION['logged_in_firstname']."!</a></li>"; ?>
+                            <?php echo "<li class='text-nopad'><p>not ".$row->user_firstname."?</p></li>"; ?>
+                        	<li class="text-nopad"><a href="logout.php" data-toggle="modal"> &nbsp; logout</a></li>
+                            <li class="text-nopad"><a href="client.php" data-toggle="modal"> &nbsp; Account info</a></li>
+                            
+                            <?php
+							}
+                            ?>
+                            
                         <ul class="dropdown-menu topcartopen ">
                             <li>
                                 <table>
@@ -124,8 +181,8 @@ $_SESSION['sort'] = 'blank';
     <div id="categorymenu">
         <nav class="subnav">
             <ul class="nav-pills categorymenu container">
-                <li><a class="active home" href="home.php"><i class="icon-home icon-white font18"></i> <span> Home</span></a></li>
-                <li><a href="catalog.php">Shop</a></li>
+                <li><a class="home" href="home.php"><i class="icon-home icon-white font18"></i> <span> Home</span></a></li>
+                <li><a class="active" href="catalog.php">Shop</a></li>
                 <li><a href="about.php">about</a></li>
                 <li><a href="contact.php">Contact Us</a> </li>
                 <li class="pull-right">
