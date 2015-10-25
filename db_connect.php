@@ -9,5 +9,8 @@ if (mysqli_connect_errno())
   }
 =======
 mysql_select_db("ju655443",$con);
+<<<<<<< HEAD
+>>>>>>> parent of 550560d... pagination working
+=======
 >>>>>>> parent of 550560d... pagination working
 ?>

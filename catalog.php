@@ -3,7 +3,11 @@
 $_SESSION['view'] = 12;
 $_SESSION['sort'] = 'blank';
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         
+=======
+
+>>>>>>> parent of 550560d... pagination working
 =======
 
 >>>>>>> parent of 550560d... pagination working
@@ -281,6 +285,7 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
                 </select>
             </form>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <?php
 				
 				$view = $_SESSION['view'];
@@ -300,6 +305,9 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
                 $totalPages = ceil($numberOfRows / $view);
 				
 				 
+=======
+            <?php 
+>>>>>>> parent of 550560d... pagination working
 =======
             <?php 
 >>>>>>> parent of 550560d... pagination working
@@ -350,6 +358,7 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
                     <?php 
 			
 <<<<<<< HEAD
+<<<<<<< HEAD
 						$last = "SELECT product_id FROM products ORDER BY product_id DESC";
             			$myLast = $mysqli->query($last);
             			$amount = $myLast->fetch_object();
@@ -360,11 +369,16 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
                         print " ".($startResults+1)."-".($startResults+$view)." of ".$amount->product_id."\n";
                     }
 =======
+=======
+>>>>>>> parent of 550560d... pagination working
 						$last = "SELECT product_id FROM products ORDER BY product_id DESC";			
             			$myLast = mysql_query($last,$con);
             			$amount = mysql_fetch_array($myLast);
 
                         print"1-".($view)." of ".$amount['product_id']."\n";
+<<<<<<< HEAD
+>>>>>>> parent of 550560d... pagination working
+=======
 >>>>>>> parent of 550560d... pagination working
                     
             		?>
