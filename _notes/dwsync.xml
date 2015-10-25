@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="search.php" server="C:/xampp/htdocs/" local="130893153388207573" remote="130893153380000000" Dst="2" />
+<<<<<<< HEAD
 <file name="catalog.php" server="C:/xampp/htdocs/" local="130902619680896805" remote="130902619680000000" Dst="2" />
 <file name="db_connect.php" server="C:/xampp/htdocs/" local="130902620473752313" remote="130902620470000000" Dst="2" />
 <file name="header.php" server="C:/xampp/htdocs/" local="130902616481148065" remote="130902616480000000" Dst="2" />
+=======
+<file name="catalog.php" server="C:/xampp/htdocs/" local="130893168549059496" remote="130893168540000000" Dst="2" />
+>>>>>>> parent of 6913e06... minor tweaks
 </dwsync>
