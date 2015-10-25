@@ -1,8 +1,7 @@
 <?php include("db_connect.php");
 include("header.php");	
 $_SESSION['view'] = 12;
-$_SESSION['sort'] = 'blank';
-                                        
+$_SESSION['sort'] = 'blank';                                       
 ?>
 <div id="maincontainer">
   <section id="product">
@@ -79,30 +78,30 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
                 </select>
             </form>
             <?php
-				$resultsPerPage = $_SESSION['view'];
+				$view = $_SESSION['view'];
 				$page = (int) $_GET['page'];
 				if($page < 1) {$page = 1;}	
-				$startResults = ($page - 1) * $resultsPerPage;
+				$startResults = ($page - 1) * $view;
 				
 				
                 
                 $numberOfRows = mysqli_num_rows($mysqli->query('SELECT * FROM products'));
-                $totalPages = ceil($numberOfRows / $resultsPerPage);
+                $totalPages = ceil($numberOfRows / $view);
 				
 				 
 				if($sort=='Name'){
 					
                     $all = "SELECT * FROM products
-                     ORDER BY product_name ASC LIMIT $startResults, $resultsPerPage";
+                     ORDER BY product_name ASC LIMIT $view";
                 }
 
                 elseif($sort=='Price'){
                     $all = "SELECT * FROM products
-                     ORDER BY cost ASC LIMIT $startResults, $resultsPerPage";
+                     ORDER BY cost ASC LIMIT $view";
                 }
 
                 else{
-                    $all = "SELECT * FROM products LIMIT $startResults, $resultsPerPage";
+                    $all = "SELECT * FROM products LIMIT $view";
 					
                 }
 				
@@ -151,9 +150,35 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
                   <ul class="thumbnails list row" style="display:block" >
                   <?php
 if($view==24){
-				  $zero=0;
-				  $twenty_four=23;
-                        while(($row = $myAll->fetch_object())&&($zero<=$twenty_four)){
+				$sort = $_SESSION['sort'];
+				$view = $_SESSION['view'];
+				$page = (int) $_GET['page'];
+				if($page < 1) {$page = 1;}	
+				$startResults = ($page - 1) * $view;
+                $numberOfRows = mysqli_num_rows($mysqli->query('SELECT * FROM products'));
+                $totalPages = ceil($numberOfRows / $view);
+				
+				 
+				if($sort=='Name'){
+					
+                    $all = "SELECT * FROM products
+                     ORDER BY product_name ASC LIMIT $view";
+                }
+
+                elseif($sort=='Price'){
+                    $all = "SELECT * FROM products
+                     ORDER BY cost ASC LIMIT $view";
+                }
+
+                else{
+                    $all = "SELECT * FROM products LIMIT $view";
+					
+                }
+				
+				$new = 'SELECT * FROM products WHERE new = "yes"';
+				$myAll = $mysqli->query($all);
+				$zero=1;
+                        while(($row = $myAll->fetch_object())&&($zero<=$view)){
 							$zero++;
 				  ?>
                     <li>
@@ -177,11 +202,40 @@ if($view==24){
                     </li>
                    <?php } }
 elseif($view==36){
-					   $zero=0;
-					   $thirty_six=35;
+				$sort = $_SESSION['sort'];
+				$view = $_SESSION['view'];
+				$page = (int) $_GET['page'];
+				if($page < 1) {$page = 1;}	
+				$startResults = ($page - 1) * $view;
+				
+				
+                
+                $numberOfRows = mysqli_num_rows($mysqli->query('SELECT * FROM products'));
+                $totalPages = ceil($numberOfRows / $view);
+				
+				 
+				if($sort=='Name'){
+					
+                    $all = "SELECT * FROM products
+                     ORDER BY product_name ASC LIMIT $view";
+                }
+
+                elseif($sort=='Price'){
+                    $all = "SELECT * FROM products
+                     ORDER BY cost ASC LIMIT $view";
+                }
+
+                else{
+                    $all = "SELECT * FROM products LIMIT $view";
+					
+                }
+				
+				$new = 'SELECT * FROM products WHERE new = "yes"';
+				$myAll = $mysqli->query($all);
+				$zero=1;
 						
 					/* While loop sending back 36 item view */
-                       while(($row = $myAll->fetch_object())&&($zero<=$thirty_six)){
+                       while(($row = $myAll->fetch_object())&&($zero<=$view)){
 							$zero++;
 				   ?>
                     <li>
@@ -205,12 +259,41 @@ elseif($view==36){
                     </li>
                    <?php } }
 else{
-					   	$view=12;
-						$twelve=11;
-						$zero=0;
+				$sort = $_SESSION['sort'];
+				$view = $_SESSION['view'];
+				$page = $_GET['page'];
+				if($page < 1) {$page = 1;}	
+				$startResults = ($page - 1) * $view;
+				
+				
+                
+                $numberOfRows = mysqli_num_rows($mysqli->query('SELECT * FROM products'));
+                $totalPages = ceil($numberOfRows / $view);
+				
+				 
+				if($sort=='Name'){
+					
+                    $all = "SELECT * FROM products
+                     ORDER BY product_name ASC LIMIT $view";
+                }
+
+                elseif($sort=='Price'){
+                    $all = "SELECT * FROM products
+                     ORDER BY cost ASC LIMIT $view";
+                }
+
+                else{
+                    $all = "SELECT * FROM products LIMIT $view";
+					
+                }
+				
+				$new = 'SELECT * FROM products WHERE new = "yes"';
+				$myAll = $mysqli->query($all);
+				$zero=1;
+						$zero=1;
 						
 						/* While loop sending back 12 item view */
-                        while(($row = $myAll->fetch_object())&&($zero<=$twelve)){
+                        while(($row = $myAll->fetch_object())&&($zero<=$view)){
 							$zero++;
 				  ?>
                     <li>

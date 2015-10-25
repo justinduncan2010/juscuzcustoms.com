@@ -15,7 +15,8 @@ session_start();
 <link href="css/prettyPhoto.css" rel="stylesheet" media="screen">
 <link href="css/portfolio.css" rel="stylesheet">
 <link rel="stylesheet" href="layerslider/css/layerslider.css" type="text/css">
-<link rel="stylesheet" href="layerslider/css/layersliderstyle.css" type="text/css"
+<link rel="stylesheet" href="layerslider/css/layersliderstyle.css" type="text/css">
+
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
