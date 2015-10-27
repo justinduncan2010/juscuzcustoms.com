@@ -8,7 +8,6 @@ include("db_connect.php");
 include("header.php");
 
 $current_url = urlencode($url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-$_SESSION['sort'] = 'blank'; 
 
 ?>
 
@@ -94,7 +93,17 @@ $_SESSION['sort'] = 'blank';
             <div class="row">
             <div class="sorting well">
             
-            <?php (isset($_POST["sort"])) ? ($sort = $_POST["sort"]) &&($_SESSION['sort']=$_POST["sort"]) : $sort=$_SESSION['sort'];?>
+            <?php 
+			
+			if(isset($_SESSION['sort'])){
+                        $sort=$_SESSION['sort'];
+                    }
+
+                    else{$_SESSION['sort']='blank';
+					
+					}
+			
+			(isset($_POST["sort"])) ? ($sort = $_POST["sort"]) &&($_SESSION['sort']=$_POST["sort"]) : $sort=$_SESSION['sort'];?>
             <div class="pull-left">
             <form id="sort_form" class="form-inline" method="post" onchange="change2()">
             Sort By:
@@ -128,13 +137,9 @@ $_SESSION['sort'] = 'blank';
                       <option <?php if ($view == 36 ) echo 'selected' ; ?> value="36">36</option>
                     </select>
                     <?php 
-				$view = $_SESSION['view'];
 				$page = (int) $_GET['page'];
-				if($page < 1) {$page = 1;}	
-				$startResults = ($page - 1) * $view;
-				
-				
-                
+                if ($page < 1) $page = 1;
+                $startResults = ($page - 1) * $view;
                 $numberOfRows = mysqli_num_rows($mysqli->query('SELECT * FROM products'));
                 $totalPages = ceil($numberOfRows / $view);
 				
