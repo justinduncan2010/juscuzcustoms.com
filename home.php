@@ -39,7 +39,6 @@
 	$view = 2;
 	$zero = 0;
 while(($row = $myFeatured->fetch_object())&&($zero<=$view)){
-	
 	$zero++;
 	echo "<li class='col-lg-3 col-md-3 col-xs-12 col-sm-6 span3'> <a class='prdocutname' href='product.php'>".$row->product_name."</a>";
 	echo "<div class='thumbnail'><span class='sale tooltip-test'> <i class='icon-gift font24'></i> <br>";
@@ -64,7 +63,9 @@ while(($row = $myFeatured->fetch_object())&&($zero<=$view)){
 <?php
 	$new = 'SELECT * FROM products WHERE new = "yes"';
 	$myNew = $mysqli->query($new);
-while($row = $myNew->fetch_object()){
+	$view = 2;
+	$zero = 0;
+while(($row = $myNew->fetch_object())&&($zero<=$view)){
 	echo "<li class='col-lg-3 col-md-3 col-xs-12 col-sm-6 span3'> <a class='prdocutname' href='product.php'>" .$row->product_name. "</a>";
 	echo "<div class='thumbnail'><span class='sale tooltip-test'> <i class='icon-gift font24'></i> <br>";
 	echo "Sale</span> <a href='#'><img alt='sale' width='300' height='222' src=" . $row->image_url . "></a>";
