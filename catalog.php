@@ -1,7 +1,15 @@
-<?php include("db_connect.php");
+<?php
+
+if((isset($_POST['view'])&&($_POST['view']))||(isset($_POST['sort'])&&($_POST['sort']))){
+header("location:catalog.php?page=1");
+	
+}
+include("db_connect.php");
 include("header.php");
-$_SESSION['view'] = 12;
-$_SESSION['sort'] = 'blank';                                       
+
+$current_url = urlencode($url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+$_SESSION['sort'] = 'blank'; 
+
 ?>
 
 <div id="maincontainer">
@@ -68,7 +76,7 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
             <div class="">
             <div class="sorting well">
             
-            <?php (isset($_POST['sort'])) ? ($sort = $_POST['sort']) &&($_SESSION['sort']=$_POST['sort']) : $sort=$_SESSION['sort'];?>
+            <?php (isset($_POST["sort"])) ? ($sort = $_POST["sort"]) &&($_SESSION['sort']=$_POST["sort"]) : $sort=$_SESSION['sort'];?>
             <div class="pull-left">
             <form id="sort_form" class="form-inline" method="post" onchange="change2()">
             Sort By:
@@ -79,6 +87,32 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
                 </select>
             </form>
             <?php
+			
+			if(isset($_SESSION['view'])&&($_SESSION['view']>12)){
+				$view=$_SESSION['view'];
+			}else{
+				$_SESSION['view']=12;
+			}
+				
+                ?>
+            
+        	</div>
+        		<!-- amount of products sidebar -->
+                 
+                <?php
+				
+				((isset($_POST["view"])) ? ($view = $_POST["view"])&&($_SESSION['view']=$_POST["view"]) : $view=$_SESSION['view']);?>
+
+                <div class="pull-right">
+                
+                <form id="view_form" method="post" onchange="change()" class="pull-right">
+                View:
+                    <select class="span1" id="view" name="view">
+                      <option <?php if ($view == 12 ) echo 'selected' ; ?> value="12">12</option>
+                      <option <?php if ($view == 24 ) echo 'selected' ; ?> value="24">24</option>
+                      <option <?php if ($view == 36 ) echo 'selected' ; ?> value="36">36</option>
+                    </select>
+                    <?php 
 				$view = $_SESSION['view'];
 				$page = (int) $_GET['page'];
 				if($page < 1) {$page = 1;}	
@@ -93,42 +127,22 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
 				if($sort=='Name'){
 					
                     $all = "SELECT * FROM products
-                     ORDER BY product_name ASC LIMIT $view";
+                     ORDER BY product_name ASC LIMIT $startResults, $view";
                 }
 
                 elseif($sort=='Price'){
                     $all = "SELECT * FROM products
-                     ORDER BY cost ASC LIMIT $view";
+                     ORDER BY cost ASC LIMIT $startResults, $view";
                 }
 
                 else{
-                    $all = "SELECT * FROM products LIMIT $view";
+                    $all = "SELECT * FROM products LIMIT $startResults, $view";
 					
                 }
 				
 				$new = 'SELECT * FROM products WHERE new = "yes"';
-				$myAll = $mysqli->query($all)
+				$myAll = $mysqli->query($all);
 				
-                ?>
-            
-        	</div>
-        		<!-- amount of products sidebar -->
-                 
-                <?php
-				
-				((isset($_POST['view'])) ? ($view = $_POST['view'])&&($_SESSION['view']=$_POST['view']) : $view=$_SESSION['view']);
-				
-				?>
-                <div class="pull-right">
-                
-                <form id="view_form" method="post" onchange="change()" class="pull-right">
-                View:
-                    <select class="span1" id="view" name="view">
-                      <option <?php if ($view == 12 ) echo 'selected' ; ?> value="12">12</option>
-                      <option <?php if ($view == 24 ) echo 'selected' ; ?> value="24">24</option>
-                      <option <?php if ($view == 36 ) echo 'selected' ; ?> value="36">36</option>
-                    </select>
-                    <?php 
 			
 						$last = "SELECT product_id FROM products ORDER BY product_id DESC";
             			$myLast = $mysqli->query($last);
