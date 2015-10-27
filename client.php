@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -168,10 +169,10 @@
             <h1 class="heading1"><span class="maintext"> <i class="icon-user"></i> Account</span></h1>
             <ul class="nav nav-list categories">
               <li>
-                <a href="#"> My Account</a>
+                <a href="client.php"> My Account</a>
               </li>
               <li>
-                <a href="#">Edit Account</a>
+                <a href="signup.php">Edit Account</a>
               </li>
               <li>
                 <a href="#">Recover Password</a>

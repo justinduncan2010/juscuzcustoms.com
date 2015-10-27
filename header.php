@@ -76,11 +76,17 @@ session_start();
 													$_SESSION['logged_in_lastname']     = $row->last_name;
 													$_SESSION['logged_in_user_id']      = $row->user_id;
 													$_SESSION['logged_in_user_access']  = $row->access_level;
-												} 
+												}
+												 
 												elseif((($_POST['username']) != ($row->username)) && (md5($_POST['password']) != ($row->password))){
 												
 												?>
-                                                
+                                                <script type="text/javascript">
+												document.getElementById('submit')
+												$(function (){
+													$('#myModal').modal('show');
+												});
+												</script>
                                                 <h4 class="red">Sorry, Invalid username or password</h4>
 												<?php break;
 												}
@@ -88,7 +94,7 @@ session_start();
 										}
 										?>
                 							<button type="button" class="btn btn-orange" data-dismiss="modal">Cancel</button>
-                                            <input name="submit" id="submit" type="submit" class="btn btn-primary" value="Sign-in" />
+                                            <input name="submit" onClick="validate()" id="submit" type="submit" class="btn btn-primary" value="Sign-in" />
                                             </form>
               							</div>
             						</div>
@@ -109,17 +115,17 @@ session_start();
                             
                             <?php
 							}else if(($_SESSION['logged_in_user_access'] == "admin")) {
-							print "<li class='text-nopad'><p>not &nbsp;".$_SESSION['logged_in_firstname']."?</p></li>"; ?>
-                        	<li class="text-nopad"><a href="logout.php"> &nbsp; logout</a></li>
-                            <li class="text-nopad"><a href="admin.php"> &nbsp; To Admin Page</a></li>
+							print "<li class='text-nopad red'><p>Hello, ".$_SESSION['logged_in_firstname']."!</p></li>"; ?>
+                        	<li class="text-nopad"><p> &nbsp; Not you?</p></li>
+                            <li class="text-nopad"><a href="logout.php"> &nbsp; Logout</a></li>
                             
                             <?php 
 							}elseif(($_SESSION['logged_in_user_access'] == "customer")){
 							?>
                             
-							<?php echo "<li class='text-nopad text-center'>Welcome".$_SESSION['logged_in_firstname']."!</a></li>"; ?>
-                            <?php echo "<li class='text-nopad'><p>not ".$row->user_firstname."?</p></li>"; ?>
-                        	<li class="text-nopad"><a href="logout.php" data-toggle="modal"> &nbsp; logout</a></li>
+							<?php echo "<li class='text-nopad text-center'>Hello".$_SESSION['logged_in_firstname']."!</a></li>"; ?>
+                            <?php echo "<li class='text-nopad'><p>Hello, ".$row->user_firstname."!</p></li>"; ?>
+                        	<li class="text-nopad">Not you?<a href="logout.php"> &nbsp; logout</a></li>
                             <li class="text-nopad"><a href="client.php" data-toggle="modal"> &nbsp; Account info</a></li>
                             
                             <?php
@@ -180,6 +186,11 @@ session_start();
                 <li><a class="active" href="catalog.php">Shop</a></li>
                 <li><a href="about.php">about</a></li>
                 <li><a href="contact.php">Contact Us</a> </li>
+                <?php
+                if(isset($_SESSION['logged_in_user_access'])&&($_SESSION['logged_in_user_access'] == "admin")) {
+				print "<li><a href='admin.php'>Admin</a> </li>";
+				}
+				?>
                 <li class="pull-right">
                 	<form action="search.php" method="get" class="form-search top-search">
                     	<input type="text" class="input-small search-query" placeholder="Search Here…">

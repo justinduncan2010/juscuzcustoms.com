@@ -1,8 +1,9 @@
 <?php include("db_connect.php");
-include("header.php");	
+include("header.php");
 $_SESSION['view'] = 12;
 $_SESSION['sort'] = 'blank';                                       
 ?>
+
 <div id="maincontainer">
   <section id="product">
     <div class="container"> 
