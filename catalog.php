@@ -92,8 +92,6 @@ $_SESSION['sort'] = 'blank';
           <section id="category">
             <h1 class="heading1"><span class="maintext"> <i class="icon-money"></i> Catalog</span></h1>
             <div class="row">
-<<<<<<< HEAD
-            <div class="">
             <div class="sorting well">
             
             <?php (isset($_POST["sort"])) ? ($sort = $_POST["sort"]) &&($_SESSION['sort']=$_POST["sort"]) : $sort=$_SESSION['sort'];?>
@@ -115,52 +113,11 @@ $_SESSION['sort'] = 'blank';
 			}
 				
                 ?>
-            
-        	</div>
-        		<!-- amount of products sidebar -->
-                 
-                <?php
-				
-				((isset($_POST["view"])) ? ($view = $_POST["view"])&&($_SESSION['view']=$_POST["view"]) : $view=$_SESSION['view']);?>
-
-=======
-              <div class="">
-                <div class="sorting well">
-                  <?php (isset($_POST['sort'])) ? ($sort = $_POST['sort']) &&($_SESSION['sort']=$_POST['sort']) : $sort=$_SESSION['sort'];?>
-                  <div class="pull-left">
-                    <form id="sort_form" class="form-inline" method="post" onchange="change2()">
-                      Sort By:
-                      <select id="sort" name="sort" class="span2">
-                        <option <?php if ($sort == 'blank' ) echo 'selected' ; ?> value='blank'>--</option>
-                        <option <?php if ($sort == 'Name' ) echo 'selected' ; ?> value='Name'>Name: A-Z</option>
-                        <option <?php if ($sort == 'Price' ) echo 'selected' ; ?> value='Price'>Price: Low to high</option>
-                      </select>
-                    </form>
-                    <?php
-				              $view = $_SESSION['view'];
-				              $page = (int) $_GET['page'];
-				              if($page < 1) {$page = 1;}	
-				              $startResults = ($page - 1) * $view;
-                      $numberOfRows = mysqli_num_rows($mysqli->query('SELECT * FROM products'));
-                      $totalPages = ceil($numberOfRows / $view); 
-				              if($sort=='Name'){
-                        $all = "SELECT * FROM products
-                        ORDER BY product_name ASC LIMIT $view";
-                      }elseif($sort=='Price'){
-                        $all = "SELECT * FROM products
-                        ORDER BY cost ASC LIMIT $view";
-                      }else{
-                        $all = "SELECT * FROM products LIMIT $view";
-					            }
-				              $new = 'SELECT * FROM products WHERE new = "yes"';
-				              $myAll = $mysqli->query($all)
-                    ?>
-                  </div>
+                </div>
         		    <!-- amount of products sidebar --> 
                 <?php
 				          ((isset($_POST['view'])) ? ($view = $_POST['view'])&&($_SESSION['view']=$_POST['view']) : $view=$_SESSION['view']);
 				        ?>
->>>>>>> origin/juscuzcustoms
                 <div class="pull-right">
                 
                 <form id="view_form" method="post" onchange="change()" class="pull-right">
@@ -171,7 +128,6 @@ $_SESSION['sort'] = 'blank';
                       <option <?php if ($view == 36 ) echo 'selected' ; ?> value="36">36</option>
                     </select>
                     <?php 
-<<<<<<< HEAD
 				$view = $_SESSION['view'];
 				$page = (int) $_GET['page'];
 				if($page < 1) {$page = 1;}	
@@ -201,9 +157,6 @@ $_SESSION['sort'] = 'blank';
 				
 				$new = 'SELECT * FROM products WHERE new = "yes"';
 				$myAll = $mysqli->query($all);
-				
-=======
->>>>>>> origin/juscuzcustoms
 			
 						$last = "SELECT product_id FROM products ORDER BY product_id DESC";
             			$myLast = $mysqli->query($last);
@@ -217,6 +170,7 @@ $_SESSION['sort'] = 'blank';
                     
             		?>
                 </form>
+                </div>
                 </div>
             <!-- amount of items to view END -->
          </div>
