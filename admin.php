@@ -25,7 +25,7 @@ include("header.php");
         <div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
           <h1 class="heading1"><span class="maintext"> <i class="icon-signin"></i> Insert into:</span></h1>
           <form class="form-horizontal form-custom">
-            <h3 class="heading3">Products Table</h3>
+            <h3 class="heading3">Insert Products</h3>
             <div class="registerbox">
               <fieldset>
                 <div class="control-group">
@@ -93,7 +93,7 @@ include("header.php");
             </div>
               </fieldset>
             </div>
-            <h3 class="heading3">Users</h3>
+            <h3 class="heading3">Insert Users</h3>
             <div class="registerbox">
               <fieldset>
 <div class="control-group">
@@ -215,7 +215,7 @@ include("header.php");
                   <li> <a href="checkout3.php">Checkout3 </a> </li>
                   <li> <a href="client.php">Client</a> </li>
                   <li> <a href="contact.php">Contact</a> </li>
-                  <li> <a href="home.php">Admin </a> </li>
+                  <li> <a href="home.php">Home </a> </li>
                   <li> <a href="product.php">product view</a> </li>
                   <li> <a href="register.php">Register</a> </li>
                   <li> <a href="register.php">Search</a> </li>

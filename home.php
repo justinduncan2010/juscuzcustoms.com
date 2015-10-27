@@ -1,5 +1,6 @@
 <?php
   include('header.php');
+  include('db_connect.php');
 ?>
 
 <!-- Header End -->
@@ -32,11 +33,18 @@
                     <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard. Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
                 </li>
 <?php
-while($row = mysql_fetch_array($myData)){
-	echo "<li class='col-lg-3 col-md-3 col-xs-12 col-sm-6 span3'> <a class='prdocutname' href='product.php'>" . $row['product_name'] . "</a>";
+	
+	$featured = 'SELECT * FROM products WHERE featured = "yes"';
+	$myFeatured = $mysqli->query($featured);
+	$view = 2;
+	$zero = 0;
+while(($row = $myFeatured->fetch_object())&&($zero<=$view)){
+	
+	$zero++;
+	echo "<li class='col-lg-3 col-md-3 col-xs-12 col-sm-6 span3'> <a class='prdocutname' href='product.php'>".$row->product_name."</a>";
 	echo "<div class='thumbnail'><span class='sale tooltip-test'> <i class='icon-gift font24'></i> <br>";
-	echo "Sale</span> <a href='#'><img alt='sale' width='300' height='222' src=" . $row['image_url'] . "></a>";
-	echo "<div class='price'><div class='pricenew'>" . $row['cost'] . "</div><div class='priceold'>" . $row['price'] . "</div><div class='ratingstar'><div class='rw-ui-container' data-urid=" . $row['product_id'] . "></div></div></div>";
+	echo "Sale</span> <a href='#'><img alt='sale' width='300' height='222' src=".$row->image_url."></a>";
+	echo "<div class='price'><div class='pricenew'>".$row->cost."</div><div class='priceold'>".$row->price."</div><div class='ratingstar'><div class='rw-ui-container' data-urid=".$row->product_id."></div></div></div>";
 	echo "<a  class='btn btn-orange btn-small addtocartbutton'>Add to Cart</a> </div>";
 	echo "</li>";
 }
@@ -54,11 +62,13 @@ while($row = mysql_fetch_array($myData)){
                     <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard. Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
                 </li>
 <?php
-while($row = mysql_fetch_array($myNew)){
-	echo "<li class='col-lg-3 col-md-3 col-xs-12 col-sm-6 span3'> <a class='prdocutname' href='product.php'>" . $row['product_name'] . "</a>";
-	echo "<div class='thumbnail'><span class='sale tooltip-test'> <i class='icon-lightbulb font24'></i> <br>";
-	echo "New</span> <a href='#'><img alt='sale' width='300' height='222' src=" . $row['image_url'] . "></a>";
-	echo "<div class='price'><div class='pricenew'>" . $row['cost'] . "</div><div class='priceold'>" . $row['price'] . "</div><div class='ratingstar'><div class='rw-ui-container' data-urid=" . $row['product_id'] . "></div></div></div>";
+	$new = 'SELECT * FROM products WHERE new = "yes"';
+	$myNew = $mysqli->query($new);
+while($row = $myNew->fetch_object()){
+	echo "<li class='col-lg-3 col-md-3 col-xs-12 col-sm-6 span3'> <a class='prdocutname' href='product.php'>" .$row->product_name. "</a>";
+	echo "<div class='thumbnail'><span class='sale tooltip-test'> <i class='icon-gift font24'></i> <br>";
+	echo "Sale</span> <a href='#'><img alt='sale' width='300' height='222' src=" . $row->image_url . "></a>";
+	echo "<div class='price'><div class='pricenew'>" . $row->cost . "</div><div class='priceold'>" . $row->price . "</div><div class='ratingstar'><div class='rw-ui-container' data-urid=" .$row->product_id. "></div></div></div>";
 	echo "<a  class='btn btn-orange btn-small addtocartbutton'>Add to Cart</a> </div>";
 	echo "</li>";
 }
