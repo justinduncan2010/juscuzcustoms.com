@@ -76,6 +76,15 @@ session_start();
 													$_SESSION['logged_in_lastname']     = $row->last_name;
 													$_SESSION['logged_in_user_id']      = $row->user_id;
 													$_SESSION['logged_in_user_access']  = $row->access_level;
+													$_SESSION['logged_in_email']        = $row->email;
+													$_SESSION['logged_in_address1']     = $row->address1;
+													$_SESSION['logged_in_address2']     = $row->address2;
+													$_SESSION['logged_in_city']         = $row->city;
+													$_SESSION['logged_in_state']        = $row->state;
+													$_SESSION['logged_in_zip']          = $row->zip;
+													$_SESSION['logged_in_telephone']    = $row->telephone;
+													$_SESSION['logged_in_mobile']       = $row->mobile;
+													$_SESSION['logged_in_company']      = $row->company;
 												}
 												 
 												elseif((($_POST['username']) != ($row->username)) && (md5($_POST['password']) != ($row->password))){
