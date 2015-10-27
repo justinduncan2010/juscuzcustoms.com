@@ -1,179 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>BatchPad Product View - Justin Duncan</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="Justin Duncan">
-<link href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet" type="text/css">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/prettyPhoto.css" rel="stylesheet" media="screen">
-<link href="css/portfolio.css" rel="stylesheet">
-<link rel="stylesheet" href="layerslider/css/layerslider.css" type="text/css">
-<link rel="stylesheet" href="layerslider/css/layersliderstyle.css" type="text/css">
+<?php
+  include('header.php');
+  include('db_connect.php');
+  $id= $_GET['id'];
+  $select_id = "SELECT * FROM products WHERE product_id = $id";
+  $myProduct = $mysqli->query($select_id);
+?>
 
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-</head>
-<body>
-<!-- Header Start -->
-<header>
-    <div class="headerstrip">
-        <div class="container">
-            <a class="logo pull-left" href="home.php"><img title="BatchPad" alt="BatchPad" src="img/logo.png"></a>
-            <!-- Top Nav Start -->
-            <div class="pull-right">
-                <div class="navbar" id="topnav">
-                    <div class="navbar-inner">                                                	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
-          						<div class="modal-dialog">
-            						<div class="modal-content">
-              							<div class="modal-header">
-                							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                							<h4 class="modal-title">Please Sign-in</h4>
-              							</div>
-              							<!-- contents of Sign-in modal -->
-              							<div class="modal-body"> 
-              								<div class="form-group">
-                    							<label class="control-label" >Username<span class="red">*</span></label>
-                    							<div class="controls">
-                      								<input type="text" class=""  value="">
-                    							</div>
-                  							</div>
-                  							<div class="form-group">
-                    							<label class="control-label" >Password<span class="red">*</span></label>
-                    							<div class="controls">
-                      								<input type="text" class=""  value="">
-                    							</div>
-                  							</div>
-              							</div>
-              							<div class="modal-footer">
-                							<button type="button" class="btn btn-orange" data-dismiss="modal">Cancel</button>
-                							<button type="button" class="btn btn-primary">Sign-in</button>
-              							</div>
-            						</div>
-            						<!-- /.modal-content --> 
-          						</div>
-          						<!-- /.modal-dialog --> 
-        					</div>
-        					<!-- /.modal --><ul class="nav" >
-                        	<li class="text-nopad text-center"><a href="register.php">Sign-up</a></li>
-                            <li class="text-nopad"><p>or</p></li>
-                        	<li class="text-nopad"><a href="#myModal" data-toggle="modal"> &nbsp; login</a></li>
-                            <li class="dropdown hover carticon "> <a href="cart.php" class="dropdown-toggle" > <i class="icon-shopping-cart font18"></i> Shopping Cart <span class="label label-orange font14">2 item(s)</span> - $1,790.00 <b class="caret"></b></a>
-                        <ul class="dropdown-menu topcartopen ">
-                            <li>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="image"><a href="product.php"><img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product"></a></td>
-                                            <td class="name"><a href="product.php">product goes here</a></td>
-                                            <td class="quantity">x&nbsp;1</td>
-                                            <td class="total">$589.50</td>
-                                            <td class="remove"><i class="icon-remove"></i></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="image"><a href="product.php"><img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product"></a></td>
-                                            <td class="name"><a href="product.php">product goes here</a></td>
-                                            <td class="quantity">x&nbsp;1</td>
-                                            <td class="total">$589.50</td>
-                                            <td class="remove"><i class="icon-remove "></i></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="textright"><b>Sub-Total:</b></td>
-                                            <td class="textright">$1.7900.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="textright"><b>Tax (6.00%):</b></td>
-                                            <td class="textright">$123.20</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="textright"><b>Total:</b></td>
-                                            <td class="textright">$1,813.20</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="well pull-right buttonwrap"> <a class="btn btn-orange" href="cart.php">View Cart</a></div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- Top Nav End -->
-        </div>
-    </div>
-    <div id="categorymenu">
+<!-- Header End -->
+<div id="categorymenu">
         <nav class="subnav">
             <ul class="nav-pills categorymenu container">
-                <li><a class="active home" href="home.php"><i class="icon-home icon-white font18"></i> <span> Home</span></a></li>
-                <li><a href="catalog.php">Shop</a></li>
+                <li><a class="home" href="home.php"><i class="icon-home icon-white font18"></i> <span> Home</span></a></li>
+                <li><a class="active" href="catalog.php">Shop</a></li>
                 <li><a href="about.php">about</a></li>
                 <li><a href="contact.php">Contact Us</a> </li>
+                <?php
+                if(isset($_SESSION['logged_in_user_access'])&&($_SESSION['logged_in_user_access'] == "admin")) {
+                print "<li><a href='admin.php'>Admin</a> </li>";
+                }
+                ?>
                 <li class="pull-right">
-                	<form action="search.php" method="get" class="form-search top-search">
-                    	<input type="text" class="input-small search-query" placeholder="Search Here…">
-                    	<button class="btn btn-orange btn-small tooltip-test" data-original-title="Search"><i class="icon-search icon-white"></i></button>
+                    <form action="search.php" method="get" class="form-search top-search">
+                        <input type="text" class="input-small search-query" placeholder="Search Here…">
+                        <button class="btn btn-orange btn-small tooltip-test" data-original-title="Search"><i class="icon-search icon-white"></i></button>
                     </form>
                 </li>
             </ul>
         </nav>
-    </div>   
-</header>
-
+    </div> 
 <!-- Header End -->
 
 <div id="maincontainer">
     <section id="product">
         <div class="container"> 
+        <ul class="breadcrumb">
+        <li>
+          <a href="home.php">Home/ </a>
+        </li>
+        <li>
+          <a href="catalog.php">Shop&nbsp;/ </a>
+        </li>
+        <li class="active">Product view</li>
+      </ul>
             <!-- Product Details-->
             <div class="row"> 
                 <!-- Left Image-->
                 <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12 span5">
                       <ul class="thumbnails mainimage clearfix">
-          <li class="col-lg-12 col-md-12 col-xs-12 col-sm-12 span5"> <img class="my-foto-container" src="img/product1big.jpg"  data-large="img/product1big.jpg" data-title="Your Product Name" data-help="Your Product Name" title="Your Product Name" /> </li>
+          <?php
+		  $row = $myProduct->fetch_object(); 
+		  echo '<li class="col-lg-12 col-md-12 col-xs-12 col-sm-12 span5"> <img class="my-foto-container" src="'.$row->image_url.'"  data-large="'.$row->image_url.'" data-title="'.$row->product_name.'" data-help="'.$row->product_name.'" title="'.$row->product_name.'" /> </li>'; ?>
         </ul>
         <div class="m5">Mouse move on Image to zoom</div>
-        <ul class="thumbnails mainimage clearfix">
-          <li class="producthtumb col-lg-3 col-md-3 col-xs-3 col-sm-3"> <img class="zoom" src="img/product1big.jpg" data-large="img/product1big.jpg" data-title="Your Product Name" data-help="Your Product Name" title="Your Product Name"></li>
-          <li class="producthtumb col-lg-3 col-md-3 col-xs-3 col-sm-3"> <img class="zoom" src="img/product2big.jpg" data-large="img/product2big.jpg" data-title="Your Product Name" data-help="Your Product Name" title="Your Product Name"></li>
-          <li class="producthtumb col-lg-3 col-md-3 col-xs-3 col-sm-3"> <img class="zoom" src="img/product1big.jpg" data-large="img/product1big.jpg" data-title="Your Product Name" data-help="Your Product Name" title="Your Product Name"></li>
-           <li class="producthtumb col-lg-3 col-md-3 col-xs-3 col-sm-3"> <img class="zoom" src="img/product2big.jpg" data-large="img/product2big.jpg" data-title="Your Product Name" data-help="Your Product Name" title="Your Product Name"></li>
-                 </ul>
                 </div>
                 <!-- Right Details-->
                 <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12 span7">
                     <div class="row">
                         <div class="span7">
-                            <h1 class="productname"><span class="bgnone">Product Name</span></h1>
+                            <?php echo '<h1 class="productname"><span class="bgnone">'.$row->product_name.'</span></h1>'; ?>
 
                             <!-- Product Description tab & comments-->
                             <div class="productdesc">
                                 <ul class="nav nav-tabs" id="myTab">
                                     <li class="active"><a href="#description">Description</a> </li>
-                                    <li><a href="#specification">Specification</a> </li>
-                                    <li><a href="#review">Review</a> </li>
+                                    <li><a href="#specification">Specifications</a> </li>
+                                    <li><a href="#review">Reviews</a> </li>
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="description">
-                                        <h2>h2 tag will be appear</h2>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                                        <h2>Product Description</h2>
+                                        <?php echo $row->description; ?> 
                                         <br>
-                                        <ul class="listoption3">
-                                            <li>Lorem ipsum dolor sit amet Consectetur adipiscing elit</li>
-                                            <li>Integer molestie lorem at massa Facilisis in pretium nisl aliquet</li>
-                                            <li>Nulla volutpat aliquam velit </li>
-                                            <li>Faucibus porta lacus fringilla vel Aenean sit amet erat nunc Eget porttitor lorem</li>
-                                        </ul>
                                     </div>
                                     <div class="tab-pane " id="specification">
                                         <ul class="productinfo">
@@ -181,42 +78,35 @@
                                             <li> <span class="productinfoleft"> Reward Points:</span> 60 </li>
                                             <li> <span class="productinfoleft"> Availability: </span> In Stock </li>
                                             <li> <span class="productinfoleft"> Old Price: </span> $500.00 </li>
-                                            <li> <span class="productinfoleft"> Ex Tax: </span> $500.00 </li>
-                                            <li> <span class="productinfoleft"> Ex Tax: </span> $500.00 </li>
-                                            <li> <span class="productinfoleft"> Product Code:</span> Product 16 </li>
-                                            <li> <span class="productinfoleft"> Reward Points:</span> 60 </li>
                                         </ul>
                                     </div>
+                                    <!-- need to put an isset if user is logged in here, if not display link to log in -->
                                     <div class="tab-pane" id="review">
                                         <h3>Write a Review</h3>
                                         <form class="form-vertical">
                                             <fieldset>
                                                 <div class="control-group">
-                                                    <label class="control-label">Text input</label>
+                                                    <label class="control-label">Name</label>
                                                     <div class="controls">
                                                         <input type="text" class="col-lg-3 col-md-3 col-xs-12 col-sm-12 span3">
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Textarea</label>
+                                                    <label class="control-label">Review</label>
                                                     <div class="controls">
                                                         <textarea rows="3"  class="col-lg-3 col-md-3 col-xs-12 col-sm-12 span3"></textarea>
                                                     </div>
                                                 </div>
                                             </fieldset>
                                             <input type="submit" class="btn btn-orange" value="continue">
+                                            
                                         </form>
-                                    </div>
-                                    <div class="tab-pane" id="producttag">
-                                        <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum <br>
-                                           <br>
-                                        </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="productprice">
-                                <div class="productpageprice"> <span class="spiral"></span>$230.00</div>
-                                <div class="productpageoldprice">Old price : $345.00</div>
+                                <?php echo '<div class="productpageprice"> <span class="spiral"></span>'.$row->cost.'</div>';
+                                	  echo '<div class="productpageoldprice">Old price : '.$row->price.'</div>'; ?>
                                 </div>
                             <div class="productbtn">
                                 <button class="btn btn-orange tooltip-test" data-original-title="Cart"> <i class="icon-shopping-cart icon-white"></i>  Add to Cart</button>
@@ -246,76 +136,10 @@
                                         </div>
                                         <a  class="btn btn-orange btn-small  addtocartbutton">Add to Cart</a> </div>
                                 </li>
-                                <li class="col-lg-3 col-md-3 col-xs-12 col-sm-6 span3"> <a class="prdocutname" href="product.php">My First Product</a>
-                                    <div class="thumbnail"> <span class="new tooltip-test"><i class="icon-lightbulb font24"></i> <br>
-                                        New</span> <a href="#"><img alt="" src="img/product1a.jpg"></a>
-                                        <div class="shortlinks">
-                                            <button  data-original-title="Cart" class="btn btn-orange tooltip-test"> <i class="icon-shopping-cart icon-white"></i> </button>
-                                            <button  data-original-title="Wishlist" class="btn btn-orange btn-small tooltip-test"> <i class="icon-heart icon-white"></i> </button>
-                                            <button  data-original-title="Compare" class="btn btn-orange btn-small tooltip-test"> <i class="icon-refresh icon-white"></i> </button>
-                                        </div>
-                                        <div class="price">
-                                            <div class="pricenew">$4459.00</div>
-                                            <div class="priceold">$5000.00</div>
-                                            <div class="ratingstar"> <i class="icon-star orange"> </i><i class="icon-star orange"> </i><i class="icon-star"> </i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i></div>
-                                        </div>
-                                        <a  class="btn btn-orange btn-small  addtocartbutton">Add to Cart</a> </div>
-                                </li>
-                                <li class="col-lg-3 col-md-3 col-xs-12 col-sm-6 span3"> <a class="prdocutname" href="product.php">My First Product</a>
-                                    <div class="thumbnail"> <a href="#"><img alt="" src="img/product2a.jpg"></a>
-                                        <div class="shortlinks">
-                                            <button  data-original-title="Cart" class="btn btn-orange tooltip-test"> <i class="icon-shopping-cart icon-white"></i> </button>
-                                            <button  data-original-title="Wishlist" class="btn btn-orange btn-small tooltip-test"> <i class="icon-heart icon-white"></i> </button>
-                                            <button  data-original-title="Compare" class="btn btn-orange btn-small tooltip-test"> <i class="icon-refresh icon-white"></i> </button>
-                                        </div>
-                                        <div class="price">
-                                            <div class="pricenew">$4459.00</div>
-                                            <div class="priceold">$5000.00</div>
-                                            <div class="ratingstar"> <i class="icon-star orange"> </i><i class="icon-star orange"> </i><i class="icon-star"> </i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i></div>
-                                        </div>
-                                        <a  class="btn btn-orange btn-small  addtocartbutton">Add to Cart</a> </div>
-                                </li>
-                               
-                                <li class="col-lg-3 col-md-3 col-xs-12 col-sm-6 span3"> <a class="prdocutname" href="product.php">My First Product</a>
-                                    <div class="thumbnail"> <a href="#"><img alt="" src="img/product2a.jpg"></a>
-                                        <div class="shortlinks">
-                                            <button  data-original-title="Cart" class="btn btn-orange tooltip-test"> <i class="icon-shopping-cart icon-white"></i> </button>
-                                            <button  data-original-title="Wishlist" class="btn btn-orange btn-small tooltip-test"> <i class="icon-heart icon-white"></i> </button>
-                                            <button  data-original-title="Compare" class="btn btn-orange btn-small tooltip-test"> <i class="icon-refresh icon-white"></i> </button>
-                                        </div>
-                                        <div class="price">
-                                            <div class="pricenew">$4459.00</div>
-                                            <div class="priceold">$5000.00</div>
-                                            <div class="ratingstar"> <i class="icon-star orange"> </i><i class="icon-star orange"> </i><i class="icon-star"> </i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i></div>
-                                        </div>
-                                        <a  class="btn btn-orange btn-small  addtocartbutton">Add to Cart</a> </div>
-                                </li>
-                                
-                                
                             </ul>
         </div>
     </section>
     <!-- Popular Brands-->
-    <section id="popularbrands" class="container mt40">
-        <h1 class="heading1"><span class="maintext">Popular Brands</span><span class="subtext"> See Our  Popular Brands</span></h1>
-        <div class="brandcarousalrelative">
-            <ul id="brandcarousal">
-                <li><img src="img/brand1.jpg" alt="" title=""/></li>
-                <li><img src="img/brand2.jpg" alt="" title=""/></li>
-                <li><img src="img/brand3.jpg" alt="" title=""/></li>
-                <li><img src="img/brand4.jpg" alt="" title=""/></li>
-                <li><img src="img/brand1.jpg" alt="" title=""/></li>
-                <li><img src="img/brand2.jpg" alt="" title=""/></li>
-                <li><img src="img/brand3.jpg" alt="" title=""/></li>
-                <li><img src="img/brand4.jpg" alt="" title=""/></li>
-                <li><img src="img/brand1.jpg" alt="" title=""/></li>
-                <li><img src="img/brand2.jpg" alt="" title=""/></li>
-                <li><img src="img/brand3.jpg" alt="" title=""/></li>
-                <li><img src="img/brand4.jpg" alt="" title=""/></li>
-            </ul>
-            <div class="clearfix"></div>
-            <a id="prev" class="prev" href="#">&lt;</a> <a id="next" class="next" href="#">&gt;</a> </div>
-    </section>
 </div>
 
 <footer id="footer">

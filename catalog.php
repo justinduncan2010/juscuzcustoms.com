@@ -1,9 +1,14 @@
 <?php
-
 if((isset($_POST['view'])&&($_POST['view']))||(isset($_POST['sort'])&&($_POST['sort']))){
-header("location:catalog.php?page=1");
-	
+	header("location:catalog.php?page=1");
 }
+if(isset($_SESSION['page'])){
+                        $sort=$_SESSION['page'];
+                    }
+
+                    else{$_SESSION['page']='1';
+					
+					}
 include("db_connect.php");
 include("header.php");
 
@@ -77,7 +82,7 @@ $current_url = urlencode($url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_
         			//$myNew = mysql_query($new,$con);  
               while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
 	              $zero++;
-	              echo "<li> <img width='50' height='50' src=" .$row->image_url. " alt='product' title='product'> <a class='productname' href='product.php'>" .$row->product_name. "</a><span class='procategory'>Furniture</span> <span class='price'>" . $row->price. "</span> </li>";
+	              echo "<li> <img width='50' height='50' src=" .$row->image_url. " alt='product' title='product'> <a class='productname' href='product.php?id=".$row->product_id."'>" .$row->product_name. "</a><span class='procategory'>Furniture</span> <span class='price'>" . $row->price. "</span> </li>";
               }
             ?>
             </ul>
@@ -192,8 +197,8 @@ if($view==24){
                     <li>
                       <div class="thumbnail">
                         <div class="row">
-						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php'><img alt='' src=" . $row->image_url. "></a> </div>";
-                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php'>" .$row->product_name. "</a>";
+						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php?id=".$row->product_id."'><img alt='' src=" . $row->image_url. "></a> </div>";
+                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php?id=".$row->product_id."'>" .$row->product_name. "</a>";
                               echo "<div class='productdiscrption'>" .$row->description. "<br></div>";
                               echo "<div class='price'>";
                               echo "<div class='pricenew'>" .$row->price. "</div>";
@@ -219,8 +224,8 @@ elseif($view==36){
                     <li>
                       <div class="thumbnail">
                         <div class="row">
-						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php'><img alt='' src=" . $row->image_url. "></a> </div>";
-                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php'>" .$row->product_name. "</a>";
+						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php?id=".$row->product_id."'><img alt='' src=" . $row->image_url. "></a> </div>";
+                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php?id=".$row->product_id."'>" .$row->product_name. "</a>";
                               echo "<div class='productdiscrption'>" .$row->description. "<br></div>";
                               echo "<div class='price'>";
                               echo "<div class='pricenew'>" .$row->price. "</div>";
@@ -246,8 +251,8 @@ else{
                     <li>
                       <div class="thumbnail">
                         <div class="row">
-						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php'><img alt='' src=" . $row->image_url. "></a> </div>";
-                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php'>" .$row->product_name. "</a>";
+						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php?id=".$row->product_id."'><img alt='' src=" . $row->image_url. "></a> </div>";
+                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php?id=".$row->product_id."'>" .$row->product_name. "</a>";
                               echo "<div class='productdiscrption'>" .$row->description. "<br></div>";
                               echo "<div class='price'>";
                               echo "<div class='pricenew'>" .$row->price. "</div>";
