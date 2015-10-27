@@ -12,6 +12,28 @@ $_SESSION['sort'] = 'blank';
 
 ?>
 
+<div id="categorymenu">
+  <nav class="subnav">
+    <ul class="nav-pills categorymenu container">
+      <li><a class="home" href="home.php"><i class="icon-home icon-white font18"></i> <span> Home</span></a></li>
+      <li><a class="active" href="catalog.php">Shop</a></li>
+      <li><a href="about.php">about</a></li>
+      <li><a href="contact.php">Contact Us</a> </li>
+      <?php
+        if(isset($_SESSION['logged_in_user_access'])&&($_SESSION['logged_in_user_access'] == "admin")) {
+          print "<li><a href='admin.php'>Admin</a> </li>";
+        }
+      ?>
+      <li class="pull-right">
+        <form action="search.php" method="get" class="form-search top-search">
+          <input type="text" class="input-small search-query" placeholder="Search Here…">
+          <button class="btn btn-orange btn-small tooltip-test" data-original-title="Search"><i class="icon-search icon-white"></i></button>
+        </form>
+      </li>
+    </ul>
+  </nav>
+</div>   
+
 <div id="maincontainer">
   <section id="product">
     <div class="container"> 
@@ -49,30 +71,28 @@ $_SESSION['sort'] = 'blank';
             <h1 class="heading1"><span class="maintext"><i class="icon-bookmark"></i> Hot New Items</span></h1>
             <ul class="bestseller">
             <?php
-			$zero=0;
-			$limit=6;
-			$new = 'SELECT * FROM products WHERE new="yes"';
-			$myNew = $mysqli->query($new);
-			//$myNew = mysql_query($new,$con);  
-while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
-	$zero++;
-	echo "<li> <img width='50' height='50' src=" .$row->image_url. " alt='product' title='product'> <a class='productname' href='product.php'>" .$row->product_name. "</a><span class='procategory'>Furniture</span> <span class='price'>" . $row->price. "</span> </li>";
-}
-?>
+			        $zero=0;
+        			$limit=6;
+        			$new = 'SELECT * FROM products WHERE new="yes"';
+        			$myNew = $mysqli->query($new);
+        			//$myNew = mysql_query($new,$con);  
+              while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
+	              $zero++;
+	              echo "<li> <img width='50' height='50' src=" .$row->image_url. " alt='product' title='product'> <a class='productname' href='product.php'>" .$row->product_name. "</a><span class='procategory'>Furniture</span> <span class='price'>" . $row->price. "</span> </li>";
+              }
+            ?>
             </ul>
           </div>
         </aside>
         <!-- Sidebar End-->
-		<!-- Category End-->
+		    <!-- Category End-->
         
-        
-        <div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
-        	 
+        <div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">	 
           <!-- Category Products-->
           <section id="category">
-                  <h1 class="heading1"><span class="maintext"> <i class="icon-money"></i> Catalog</span></h1>
-
+            <h1 class="heading1"><span class="maintext"> <i class="icon-money"></i> Catalog</span></h1>
             <div class="row">
+<<<<<<< HEAD
             <div class="">
             <div class="sorting well">
             
@@ -103,6 +123,44 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
 				
 				((isset($_POST["view"])) ? ($view = $_POST["view"])&&($_SESSION['view']=$_POST["view"]) : $view=$_SESSION['view']);?>
 
+=======
+              <div class="">
+                <div class="sorting well">
+                  <?php (isset($_POST['sort'])) ? ($sort = $_POST['sort']) &&($_SESSION['sort']=$_POST['sort']) : $sort=$_SESSION['sort'];?>
+                  <div class="pull-left">
+                    <form id="sort_form" class="form-inline" method="post" onchange="change2()">
+                      Sort By:
+                      <select id="sort" name="sort" class="span2">
+                        <option <?php if ($sort == 'blank' ) echo 'selected' ; ?> value='blank'>--</option>
+                        <option <?php if ($sort == 'Name' ) echo 'selected' ; ?> value='Name'>Name: A-Z</option>
+                        <option <?php if ($sort == 'Price' ) echo 'selected' ; ?> value='Price'>Price: Low to high</option>
+                      </select>
+                    </form>
+                    <?php
+				              $view = $_SESSION['view'];
+				              $page = (int) $_GET['page'];
+				              if($page < 1) {$page = 1;}	
+				              $startResults = ($page - 1) * $view;
+                      $numberOfRows = mysqli_num_rows($mysqli->query('SELECT * FROM products'));
+                      $totalPages = ceil($numberOfRows / $view); 
+				              if($sort=='Name'){
+                        $all = "SELECT * FROM products
+                        ORDER BY product_name ASC LIMIT $view";
+                      }elseif($sort=='Price'){
+                        $all = "SELECT * FROM products
+                        ORDER BY cost ASC LIMIT $view";
+                      }else{
+                        $all = "SELECT * FROM products LIMIT $view";
+					            }
+				              $new = 'SELECT * FROM products WHERE new = "yes"';
+				              $myAll = $mysqli->query($all)
+                    ?>
+                  </div>
+        		    <!-- amount of products sidebar --> 
+                <?php
+				          ((isset($_POST['view'])) ? ($view = $_POST['view'])&&($_SESSION['view']=$_POST['view']) : $view=$_SESSION['view']);
+				        ?>
+>>>>>>> origin/juscuzcustoms
                 <div class="pull-right">
                 
                 <form id="view_form" method="post" onchange="change()" class="pull-right">
@@ -113,6 +171,7 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
                       <option <?php if ($view == 36 ) echo 'selected' ; ?> value="36">36</option>
                     </select>
                     <?php 
+<<<<<<< HEAD
 				$view = $_SESSION['view'];
 				$page = (int) $_GET['page'];
 				if($page < 1) {$page = 1;}	
@@ -143,6 +202,8 @@ while(($row = $myNew->fetch_object()) && ($zero<=$limit)){
 				$new = 'SELECT * FROM products WHERE new = "yes"';
 				$myAll = $mysqli->query($all);
 				
+=======
+>>>>>>> origin/juscuzcustoms
 			
 						$last = "SELECT product_id FROM products ORDER BY product_id DESC";
             			$myLast = $mysqli->query($last);

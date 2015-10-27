@@ -1,24 +1,10 @@
 // JavaScript Document
 $('document').ready(function(){
 	
-<!-- Tooltip -->	
+//Tooltip	
  $('[data-toggle="tooltip"]').tooltip()
 
-		
-<!-- google map -->		
-$("#contactmap").gMap({
-	address: "Batchpad, Elizabeth Street, Melbourne, Victoria, Australia",//replace this with your address
-	zoom: 10,
-	markers:[
-		{
-			latitude: -37.817361, //replace this with your latitude
-			longitude: 144.965047,//replace this with your longitude
-			html: "Envato Pty Ltd" //replace this with your text
-		}		
-	]
-});
-
-<!-- Accrodian -->	
+//Accrodian	
 	var $acdata = $('.accrodian-data'),
 		$acclick = $('.accrodian-trigger');
 
@@ -34,7 +20,7 @@ $("#contactmap").gMap({
 	});
 		
 
-<!-- Toggle -->			
+//Toggle		
 	$('.togglehandle').click(function()
 	{
 		$(this).toggleClass('active')

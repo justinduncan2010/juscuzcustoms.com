@@ -4,6 +4,27 @@
 ?>
 
 <!-- Header End -->
+<div id="categorymenu">
+        <nav class="subnav">
+            <ul class="nav-pills categorymenu container">
+                <li><a class="home active" href="home.php"><i class="icon-home icon-white font18"></i> <span> Home</span></a></li>
+                <li><a href="catalog.php">Shop</a></li>
+                <li><a href="about.php">about</a></li>
+                <li><a href="contact.php">Contact Us</a> </li>
+                <?php
+                if(isset($_SESSION['logged_in_user_access'])&&($_SESSION['logged_in_user_access'] == "admin")) {
+                print "<li><a href='admin.php'>Admin</a> </li>";
+                }
+                ?>
+                <li class="pull-right">
+                    <form action="search.php" method="get" class="form-search top-search">
+                        <input type="text" class="input-small search-query" placeholder="Search Here…">
+                        <button class="btn btn-orange btn-small tooltip-test" data-original-title="Search"><i class="icon-search icon-white"></i></button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>   
 
 <div id="maincontainer"> 
     <!-- Slider Start-->
@@ -66,7 +87,11 @@ while(($row = $myFeatured->fetch_object())&&($zero<=$view)){
 	$view = 2;
 	$zero = 0;
 while(($row = $myNew->fetch_object())&&($zero<=$view)){
+<<<<<<< HEAD
 	$zero++;
+=======
+    $zero++;
+>>>>>>> origin/juscuzcustoms
 	echo "<li class='col-lg-3 col-md-3 col-xs-12 col-sm-6 span3'> <a class='prdocutname' href='product.php'>" .$row->product_name. "</a>";
 	echo "<div class='thumbnail'><span class='sale tooltip-test'> <i class='icon-gift font24'></i> <br>";
 	echo "Sale</span> <a href='#'><img alt='sale' width='300' height='222' src=" . $row->image_url . "></a>";
