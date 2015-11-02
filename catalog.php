@@ -4,10 +4,8 @@ if((isset($_POST['view'])&&($_POST['view']))||(isset($_POST['sort'])&&($_POST['s
 }
 if(isset($_SESSION['page'])){
                         $sort=$_SESSION['page'];
-                    }
-
-                    else{$_SESSION['page']='1';
-					
+                    }else{
+						$_SESSION['page']='1';
 					}
 include("db_connect.php");
 include("header.php");

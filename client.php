@@ -1,6 +1,9 @@
 <?php
-include("db_connect.php");
-include("header.php");
+  include('header.php');
+  include('db_connect.php');
+  $id= $_GET['id'];
+  $select_id = "SELECT * FROM users WHERE user_id = $id";
+  $select_id_result = $mysqli->query($select_id);
 
 	if(!isset($_SESSION['logged_in']) || ($_SESSION['logged_in_user_access'] == 'admin') || ($_SESSION['logged_in_user_access'] == 'superuser') ) {
 

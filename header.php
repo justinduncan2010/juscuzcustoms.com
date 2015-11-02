@@ -1,10 +1,11 @@
 <?php 
 session_start();
+include ('db_connect.php');
 ?>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>BatchPad Home - Justin Duncan</title>
+<title><?php print $_SERVER['PHP_SELF']; ?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="Justin Duncan">
@@ -44,13 +45,13 @@ session_start();
               							<div class="modal-body"> 
               								<div class="form-group">
                                             	<form method="post" action="">
-                    							<label class="control-label" >Username<span class="red">*</span></label>
+                    							<label class="control-label" >Username<span class="red">&nbsp;*</span></label>
                     							<div class="controls">
                       								<input name="username" id="username" type="text" placeholder="Username or Email"/>
                     							</div>
                   							</div>
                   							<div class="form-group">
-                    							<label class="control-label" >Password<span class="red">*</span></label>
+                    							<label class="control-label" >Password<span class="red">&nbsp;*</span></label>
                     							<div class="controls">
                       								<input name="password" id="password" type="password" placeholder="Password"/>
                     							</div>
@@ -90,12 +91,6 @@ session_start();
 												elseif((($_POST['username']) != ($row->username)) && (md5($_POST['password']) != ($row->password))){
 												
 												?>
-                                                <script type="text/javascript">
-												document.getElementById('submit')
-												$(function (){
-													$('#myModal').modal('show');
-												});
-												</script>
                                                 <h4 class="red">Sorry, Invalid username or password</h4>
 												<?php break;
 												}
@@ -123,7 +118,7 @@ session_start();
                             <li class="dropdown hover carticon "> <a href="cart.php" class="dropdown-toggle" > <i class="icon-shopping-cart font18"></i> Shopping Cart <span class="label label-orange font14">2 item(s)</span> - $1,790.00 <b class="caret"></b></a>
                             
                             <?php
-							}else if(($_SESSION['logged_in_user_access'] == "admin")) {
+							}else if(($_SESSION['logged_in_user_access'] == "admin")||($_SESSION['logged_in_user_access'] == "superuser")) {
 							print "<li class='text-nopad red'><p>Hello, ".$_SESSION['logged_in_firstname']."!</p></li>"; ?>
                         	<li class="text-nopad"><p> &nbsp; Not you?</p></li>
                             <li class="text-nopad"><a href="logout.php"> &nbsp; Logout</a></li>
@@ -135,51 +130,11 @@ session_start();
 							<?php echo "<li class='text-nopad text-center'>Hello".$_SESSION['logged_in_firstname']."!</a></li>"; ?>
                             <?php echo "<li class='text-nopad'><p>Hello, ".$row->user_firstname."!</p></li>"; ?>
                         	<li class="text-nopad">Not you?<a href="logout.php"> &nbsp; logout</a></li>
-                            <li class="text-nopad"><a href="client.php" data-toggle="modal"> &nbsp; Account info</a></li>
+                            <?php echo '<li class="text-nopad"><a href="client.php?id='.$_SESSION['logged_in_user_id'].'" data-toggle="modal"> &nbsp; Account info</a></li>'; ?>
                             
                             <?php
 							}
                             ?>
-                            
-                        <ul class="dropdown-menu topcartopen ">
-                            <li>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="image"><a href="product.php"><img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product"></a></td>
-                                            <td class="name"><a href="product.php">product goes here</a></td>
-                                            <td class="quantity">x&nbsp;1</td>
-                                            <td class="total">$589.50</td>
-                                            <td class="remove"><i class="icon-remove"></i></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="image"><a href="product.php"><img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product"></a></td>
-                                            <td class="name"><a href="product.php">product goes here</a></td>
-                                            <td class="quantity">x&nbsp;1</td>
-                                            <td class="total">$589.50</td>
-                                            <td class="remove"><i class="icon-remove "></i></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="textright"><b>Sub-Total:</b></td>
-                                            <td class="textright">$1.7900.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="textright"><b>Tax (6.00%):</b></td>
-                                            <td class="textright">$123.20</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="textright"><b>Total:</b></td>
-                                            <td class="textright">$1,813.20</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="well pull-right buttonwrap"> <a class="btn btn-orange" href="cart.php">View Cart</a></div>
-                            </li>
-                        </ul>
                     </li>
                 </ul>
                     </div>

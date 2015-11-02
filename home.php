@@ -61,9 +61,9 @@
 	$zero = 0;
 while(($row = $myFeatured->fetch_object())&&($zero<=$view)){
 	$zero++;
-	echo "<li class='col-lg-3 col-md-3 col-xs-12 col-sm-6 span3'> <a class='prdocutname' href='product.php'>".$row->product_name."</a>";
-	echo "<div class='thumbnail'><span class='sale tooltip-test'> <i class='icon-gift font24'></i> <br>";
-	echo "Sale</span> <a href='#'><img alt='sale' width='300' height='222' src=".$row->image_url."></a>";
+	echo "<li class='col-lg-3 col-md-3 col-xs-12 col-sm-6 span3'> <a class='prdocutname' href='product.php?id=".$row->product_id."'>".$row->product_name."</a>";
+	echo "<div class='thumbnail'><span class='sale tooltip-test'> <i class='icon-money font24'></i> <br>";
+	echo "Sale</span> <a href='product.php?id=".$row->product_id."'><img alt='sale' width='300' height='222' src=".$row->image_url."></a>";
 	echo "<div class='price'><div class='pricenew'>".$row->cost."</div><div class='priceold'>".$row->price."</div><div class='ratingstar'><div class='rw-ui-container' data-urid=".$row->product_id."></div></div></div>";
 	echo "<a  class='btn btn-orange btn-small addtocartbutton'>Add to Cart</a> </div>";
 	echo "</li>";
@@ -89,8 +89,8 @@ while(($row = $myFeatured->fetch_object())&&($zero<=$view)){
 while(($row = $myNew->fetch_object())&&($zero<=$view)){
     $zero++;
 	echo "<li class='col-lg-3 col-md-3 col-xs-12 col-sm-6 span3'> <a class='prdocutname' href='product.php'>" .$row->product_name. "</a>";
-	echo "<div class='thumbnail'><span class='sale tooltip-test'> <i class='icon-gift font24'></i> <br>";
-	echo "Sale</span> <a href='#'><img alt='sale' width='300' height='222' src=" . $row->image_url . "></a>";
+	echo "<div class='thumbnail'><span class='new tooltip-test'> <i class='icon-calendar font24'></i> <br>";
+	echo "New</span> <a href='product.php?id=".$row->product_id."'><img alt='sale' width='300' height='222' src=" . $row->image_url . "></a>";
 	echo "<div class='price'><div class='pricenew'>" . $row->cost . "</div><div class='priceold'>" . $row->price . "</div><div class='ratingstar'><div class='rw-ui-container' data-urid=" .$row->product_id. "></div></div></div>";
 	echo "<a  class='btn btn-orange btn-small addtocartbutton'>Add to Cart</a> </div>";
 	echo "</li>";
@@ -105,4 +105,3 @@ while(($row = $myNew->fetch_object())&&($zero<=$view)){
 <?php
   include('footer.php');
 ?>
-</div>
