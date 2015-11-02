@@ -131,7 +131,7 @@
     s.parentNode.insertBefore(rw, s);
     }(document, new Date(), "script", "rating-widget.com/"));</script>
 <?php
-mysql_close($con);
+mysqli_close($mysqli);
 ?>
   
   </body>
