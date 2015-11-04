@@ -64,6 +64,9 @@ include("header.php");
           <h1 class="heading1"><span class="maintext"> <i class="icon-signin"></i> Products List</span></h1>
 <table class="table table-striped table-bordered table-condensed">
 <thead class="">
+<?php if($_SESSION['logged_in_user_access'] == 'admin'){ ?>
+<th>Edit</th>
+<?php } ?>
 <th>product&nbsp;Id</th>
 <th>Product Name</th>
 <th>Description</th>
@@ -83,7 +86,8 @@ include("header.php");
 while($row = $myProducts->fetch_object()){
 echo "<tr>";
 if($_SESSION['logged_in_user_access'] == 'admin'){
-echo "<td><a href='deleteproduct.php?id=".$row->product_id."'><i class='icon-trash'></i></a>" .$row->product_id. "</td>";
+echo "<td><a href='deleteproduct.php?id=".$row->product_id."'><i class='icon-trash'></i></a></td>";
+echo "<td>" .$row->product_id. "</td>";
 }elseif($_SESSION['logged_in_user_access'] == 'superuser'){
 echo "<td>" .$row->product_id. "</td>";
 }
@@ -122,6 +126,9 @@ echo "</tr>";
 <h1 class="heading1"><span class="maintext"> <i class="icon-signin"></i> Customers List</span></h1>
 <table class="table table-striped table-bordered table-condensed">
 <thead>
+<?php if($_SESSION['logged_in_user_access'] == 'admin'){ ?>
+<th>Edit</th>
+<?php } ?>
 <th>User Id</th>
 <th>Username</th>
 <th>Password</th>
@@ -144,7 +151,8 @@ echo "</tr>";
 while($row = $myCustomers->fetch_object()){
 echo "<tr>";
 if($_SESSION['logged_in_user_access'] == 'admin'){
-echo "<td><a href='deleteuser.php?id=".$row->user_id."'><i class='icon-trash'></i></a>" .$row->user_id. "</td>";
+echo "<td><a href='deleteuser.php?id=".$row->user_id."'><i class='icon-trash'></i></a></td>";
+echo "<td>" .$row->user_id. "</td>";
 }elseif($_SESSION['logged_in_user_access'] == 'superuser'){
 echo "<td>" .$row->user_id. "</td>";
 }
@@ -179,12 +187,16 @@ echo "</tr>";
 <h1 class="heading1"><span class="maintext"> <i class="icon-signin"></i> Admins and Users List</span></h1>
 <table class="table table-striped table-bordered table-condensed">
 <thead>
+<?php if($_SESSION['logged_in_user_access'] == 'admin'){ ?>
+<th>Edit</th>
+<?php } ?>
 <th>User Id</th>
 <th>Username</th>
 <th>Password</th>
 <th>First Name</th>
 <th>Last Name</th>
 <th>E-Mail</th>
+</thead>
 <tbody>
 <?php
 	$select_users = "SELECT * FROM users WHERE access_level != 'customer'";
@@ -192,7 +204,8 @@ echo "</tr>";
 while($row = $myUsers->fetch_object()){
 echo "<tr>";
 if($_SESSION['logged_in_user_access'] == 'admin'){
-echo "<td><a href='deleteuser.php?id=".$row->user_id."'><i class='icon-trash'></i></a>" .$row->user_id. "</td>";
+echo "<td><a href='deleteuser.php?id=".$row->user_id."'><i class='icon-trash'></i></a></td>";
+echo "<td>" .$row->user_id. "</td>";
 }elseif($_SESSION['logged_in_user_access'] == 'superuser'){
 echo "<td>" .$row->user_id. "</td>";
 }
@@ -211,7 +224,7 @@ echo "<td>" .$row->email."</td>"; ?>
 <?php } ?>
 </div>
           <div class="clearfix"></div>
-          <br>
+          <br />
         </div>        
         <!-- Sidebar End-->
       </div>
