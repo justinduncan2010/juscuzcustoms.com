@@ -83,7 +83,7 @@ include("header.php");
 while($row = $myProducts->fetch_object()){
 echo "<tr>";
 if($_SESSION['logged_in_user_access'] == 'admin'){
-echo "<td><a href='deleteproduct.php?id=".$row->product_id."'><i class='icon-trash'></i></a>&nbsp;<a href='editproduct.php?id=".$row->product_id."'><i class='icon-pencil'></i></a>" .$row->product_id. "</td>";
+echo "<td><a href='deleteproduct.php?id=".$row->product_id."'><i class='icon-trash'></i></a>" .$row->product_id. "</td>";
 }elseif($_SESSION['logged_in_user_access'] == 'superuser'){
 echo "<td>" .$row->product_id. "</td>";
 }
@@ -122,13 +122,7 @@ echo "</tr>";
 <h1 class="heading1"><span class="maintext"> <i class="icon-signin"></i> Customers List</span></h1>
 <table class="table table-striped table-bordered table-condensed">
 <thead>
-<?php
-if($_SESSION['logged_in_user_access'] == 'admin'){
-echo '<th>Edit</th>';
-echo '<th>User Id</th>';
-}else{
-echo '<th>User Id</th>';
-} ?>
+<th>User Id</th>
 <th>Username</th>
 <th>Password</th>
 <th>First Name</th>
@@ -150,9 +144,8 @@ echo '<th>User Id</th>';
 while($row = $myCustomers->fetch_object()){
 echo "<tr>";
 if($_SESSION['logged_in_user_access'] == 'admin'){
-echo "<td><a href='deleteuser.php?id=".$row->user_id."'><i class='icon-trash'></i></a>&nbsp;<a href='edituser.php?id=".$row->user_id."'><i class='icon-pencil'></i></a></td>";
-echo "<td>" .$row->user_id. "</td>";
-}else{
+echo "<td><a href='deleteuser.php?id=".$row->user_id."'><i class='icon-trash'></i></a>" .$row->user_id. "</td>";
+}elseif($_SESSION['logged_in_user_access'] == 'superuser'){
 echo "<td>" .$row->user_id. "</td>";
 }
 echo "<td>" .$row->username."</td>";
@@ -186,13 +179,7 @@ echo "</tr>";
 <h1 class="heading1"><span class="maintext"> <i class="icon-signin"></i> Admins and Users List</span></h1>
 <table class="table table-striped table-bordered table-condensed">
 <thead>
-<?php
-if($_SESSION['logged_in_user_access'] == 'admin'){
-echo '<th>Edit</th>';
-echo '<th>User Id</th>';
-}else{
-echo '<th>User Id</th>';
-} ?>
+<th>User Id</th>
 <th>Username</th>
 <th>Password</th>
 <th>First Name</th>
@@ -205,9 +192,8 @@ echo '<th>User Id</th>';
 while($row = $myUsers->fetch_object()){
 echo "<tr>";
 if($_SESSION['logged_in_user_access'] == 'admin'){
-echo "<td><a href='deleteuser.php?id=".$row->user_id."'><i class='icon-trash'></i></a>&nbsp;<a href='edituser.php?id=".$row->user_id."'><i class='icon-pencil'></i></a></td>";
-echo "<td>" .$row->user_id. "</td>";
-}else{
+echo "<td><a href='deleteuser.php?id=".$row->user_id."'><i class='icon-trash'></i></a>" .$row->user_id. "</td>";
+}elseif($_SESSION['logged_in_user_access'] == 'superuser'){
 echo "<td>" .$row->user_id. "</td>";
 }
 echo "<td>" .$row->username."</td>";
@@ -221,7 +207,7 @@ echo "<td>" .$row->email."</td>"; ?>
 </table>
 <div class="pull-left">
 <?php if($_SESSION['logged_in_user_access'] == 'admin'){ ?>
-<a href="insertuser.php" class="btn btn-orange">Edit Information</a>
+<a href="insertuser.php" class="btn btn-orange">Insert New User</a>
 <?php } ?>
 </div>
           <div class="clearfix"></div>

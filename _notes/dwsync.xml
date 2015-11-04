@@ -8,7 +8,7 @@
 <file name="home.php" server="C:/xampp/htdocs/" local="130909503879161738" remote="130909503870000000" Dst="1" />
 <file name="product.php" server="C:/xampp/htdocs/" local="130909503870461241" remote="130909503870000000" Dst="1" />
 <file name="logout.php" server="C:/xampp/htdocs/" local="130909476194462726" remote="130909476190000000" Dst="1" />
-<file name="admin.php" server="C:/xampp/htdocs/" local="130911376378350271" remote="130911376370000000" Dst="1" />
+<file name="admin.php" server="C:/xampp/htdocs/" local="130909792591385133" remote="130909792590000000" Dst="1" />
 <file name="client.php" server="C:/xampp/htdocs/" local="130909536714759827" remote="130909536710000000" Dst="1" />
 <file name="delete.php" server="C:/xampp/htdocs/" local="130909728091425946" remote="130909728090000000" Dst="1" />
 <file name="insertproduct.php" server="C:/xampp/htdocs/" local="130909789986276129" remote="130909789980000000" Dst="1" />
@@ -16,5 +16,4 @@
 <file name="insertuser.php" server="C:/xampp/htdocs/" local="130909785755084119" remote="130909785750000000" Dst="1" />
 <file name="deleteuser.php" server="C:/xampp/htdocs/" local="130909742729873218" remote="130909742720000000" Dst="1" />
 <file name="deleteproduct.php" server="C:/xampp/htdocs/" local="130909751145284552" remote="130909751140000000" Dst="1" />
-<file name="edituser.php" server="C:/xampp/htdocs/" local="130911392719635340" remote="130911392710000000" Dst="1" />
 </dwsync>

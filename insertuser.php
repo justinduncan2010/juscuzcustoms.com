@@ -153,14 +153,13 @@ include("header.php");
                 <div class="pull-left">
                 <?php
                 if(isset($_POST['submit'])) {
-					$mysqli->query($edit_user_query);
-					$edit_user_query = "INSERT INTO users (username, password, first_name, last_name, access_level, email, address1, address2, city, state, zip, telephone, mobile, company)
+				$insert_user_query = "INSERT INTO users (username, password, first_name, last_name, access_level, email, address1, address2, city, state, zip, telephone, mobile, company)
 										VALUES ('".$_POST['username']."', '".md5($_POST['password'])."', '".$_POST['first']."', '".$_POST['last']."', '".$_POST['access']."','".$_POST['email']."','".$_POST['address1']."','".$_POST['address2']."','".$_POST['city']."','".$_POST['state']."','".$_POST['zip']."','".$_POST['telephone']."','".$_POST['mobile']."','".$_POST['company']."')";
-				
+				$mysqli->query($insert_user_query);
 				?> <script type="text/javascript"> alert('You have successfully entered the User');</script>
                 <?php } ?>
               <input class="btn btn-orange" name="submit" id="submit" type="submit" value="Insert User" />
-              <input action="action" type="button" class="btn btn-danger" value="Cancel" onclick="window.history.go(-1); return false;" />
+              <a href="admin.php" class="btn btn-danger"> Cancel </a>
             </div>
               </fieldset>
             </div>
