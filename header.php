@@ -88,7 +88,7 @@ include ('db_connect.php');
 													$_SESSION['logged_in_company']      = $row->company;
 												}
 												 
-												elseif((($_POST['username']) != ($row->username)) && (md5($_POST['password']) != ($row->password))){
+												elseif((($_POST['username']) != ($row->username)) || (md5($_POST['password']) != ($row->password))){
 												
 												?>
                                                 <h4 class="red">Sorry, Invalid username or password</h4>
@@ -98,7 +98,7 @@ include ('db_connect.php');
 										}
 										?>
                 							<button type="button" class="btn btn-orange" data-dismiss="modal">Cancel</button>
-                                            <input name="submit" onClick="validate()" id="submit" type="submit" class="btn btn-primary" value="Sign-in" />
+                                            <input name="submit" id="submit" type="submit" class="btn btn-primary" value="Sign-in" />
                                             </form>
               							</div>
             						</div>
