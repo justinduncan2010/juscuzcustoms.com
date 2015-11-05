@@ -17,5 +17,6 @@
 <file name="deleteuser.php" server="C:/xampp/htdocs/" local="130909742729873218" remote="130909742720000000" Dst="1" />
 <file name="deleteproduct.php" server="C:/xampp/htdocs/" local="130909751145284552" remote="130909751140000000" Dst="1" />
 <file name="edituser.php" server="C:/xampp/htdocs/" local="130911615165051320" remote="130911615160000000" Dst="1" />
-<file name="register.php" server="C:/xampp/htdocs/" local="130886164012501795" remote="130886164010000000" Dst="1" />
+<file name="register.php" server="C:/xampp/htdocs/" local="130912231826980958" remote="130912231820000000" Dst="1" />
+<file name="validate.php" server="C:/xampp/htdocs/" local="130912233826900879" remote="130912233820000000" Dst="1" />
 </dwsync>
