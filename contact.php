@@ -16,9 +16,9 @@ $_SESSION['sort'] = 'blank';
         }
         ?>
                 <li class="pull-right">
-                  <form action="search.php" method="get" class="form-search top-search">
-                      <input type="text" class="input-small search-query" placeholder="Search Here…">
-                      <button class="btn btn-orange btn-small tooltip-test" data-original-title="Search"><i class="icon-search icon-white"></i></button>
+                  <form action="search.php" method="post" class="form-search top-search">
+                        <input type="text" name="search" class="input-small search-query" placeholder="Search Here…">
+                        <button class="btn btn-orange btn-small tooltip-test" data-original-title="Search"><i class="icon-search icon-white"></i></button>
                     </form>
                 </li>
             </ul>
@@ -240,6 +240,16 @@ $_SESSION['sort'] = 'blank';
     rw.src = p + "//" + a + "external" + f + ".js?ck=" + ck;
     s.parentNode.insertBefore(rw, s);
     }(document, new Date(), "script", "rating-widget.com/"));</script>
+
+<!--Google Analytics-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-69797602-1', 'auto');
+  ga('send', 'pageview');
+</script>
 
 </body>
 
