@@ -3,12 +3,12 @@
 <file name="search.php" server="C:/xampp/htdocs/" local="130892177893557786" remote="130892177890000000" Dst="1" />
 <file name="catalog.php" server="C:/xampp/htdocs/" local="130909480865945458" remote="130909480860000000" Dst="1" />
 <file name="header.php" server="C:/xampp/htdocs/" local="130909766873504154" remote="130909766870000000" Dst="1" />
-<file name="db_connect.php" server="C:/xampp/htdocs/" local="130909480908207875" remote="130909480900000000" Dst="1" />
+<file name="db_connect.php" server="C:/xampp/htdocs/" local="130911394150641439" remote="130911394150000000" Dst="1" />
 <file name="footer.php" server="C:/xampp/htdocs/" local="130909476194412724" remote="130909476190000000" Dst="1" />
 <file name="home.php" server="C:/xampp/htdocs/" local="130909503879161738" remote="130909503870000000" Dst="1" />
 <file name="product.php" server="C:/xampp/htdocs/" local="130909503870461241" remote="130909503870000000" Dst="1" />
 <file name="logout.php" server="C:/xampp/htdocs/" local="130909476194462726" remote="130909476190000000" Dst="1" />
-<file name="admin.php" server="C:/xampp/htdocs/" local="130909792591385133" remote="130909792590000000" Dst="1" />
+<file name="admin.php" server="C:/xampp/htdocs/" local="130911606828492507" remote="130911606820000000" Dst="1" />
 <file name="client.php" server="C:/xampp/htdocs/" local="130909536714759827" remote="130909536710000000" Dst="1" />
 <file name="delete.php" server="C:/xampp/htdocs/" local="130909728091425946" remote="130909728090000000" Dst="1" />
 <file name="insertproduct.php" server="C:/xampp/htdocs/" local="130909789986276129" remote="130909789980000000" Dst="1" />
@@ -16,4 +16,5 @@
 <file name="insertuser.php" server="C:/xampp/htdocs/" local="130909785755084119" remote="130909785750000000" Dst="1" />
 <file name="deleteuser.php" server="C:/xampp/htdocs/" local="130909742729873218" remote="130909742720000000" Dst="1" />
 <file name="deleteproduct.php" server="C:/xampp/htdocs/" local="130909751145284552" remote="130909751140000000" Dst="1" />
+<file name="edituser.php" server="C:/xampp/htdocs/" local="130911608149907114" remote="130911608140000000" Dst="1" />
 </dwsync>
