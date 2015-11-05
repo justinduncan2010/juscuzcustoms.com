@@ -114,7 +114,7 @@
         <!-- Register Account-->
         <div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">
           <h1 class="heading1"><span class="maintext"> <i class="icon-signin"></i> Register Account</span></h1>
-          <form class="form-horizontal form-custom">
+          <form class="form-horizontal form-custom" method="post">
             <h3 class="heading3">Your Personal Details</h3>
             <div class="registerbox">
               <fieldset>
@@ -215,7 +215,7 @@
               <label class="checkbox inline">
                 <input type="checkbox" value="option2" >
               </label>
-              I have read and agree to the <a href="#" >Privacy Policy</a>
+              I have read and agree to the <a href="policies.php" >Privacy Policy</a>
               &nbsp;
               <input type="Submit" class="btn btn-orange" value="Continue">
             </div>
@@ -228,10 +228,6 @@
           <div class="sidewidt">
             <h1 class="heading1"><span class="maintext"> <i class="icon-user"></i> Sign Up</span></h1>
             <ul class="nav nav-list categories">
-              <li>
-               	<b>Already a Member?</b>
-                <a> Sign-up</a>
-              </li>
               <li>
               <b>Don't remember your Password?</b>
                 <a href="contact.php">Contact us</a>

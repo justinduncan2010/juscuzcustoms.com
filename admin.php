@@ -94,7 +94,7 @@ echo "<td>" .$row->qty_stock. "</td>";
 echo "<td>" .$row->cost."</td>";
 echo "<td>" .$row->price."</td>";
 echo "<td>" .$row->image_url."</td>";
-//if the person accountable is not null display N/A
+//if the person accountable is not null display nothing
 if($row->sale == NULL){	
 	echo "<td>" . "" . "</td>";
 }else{
