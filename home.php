@@ -17,8 +17,8 @@
                 }
                 ?>
                 <li class="pull-right">
-                    <form action="search.php" method="get" class="form-search top-search">
-                        <input type="text" class="input-small search-query" placeholder="Search Here…">
+                    <form action="search.php" method="post" class="form-search top-search">
+                        <input type="text" name="search" class="input-small search-query" placeholder="Search Here…">
                         <button class="btn btn-orange btn-small tooltip-test" data-original-title="Search"><i class="icon-search icon-white"></i></button>
                     </form>
                 </li>

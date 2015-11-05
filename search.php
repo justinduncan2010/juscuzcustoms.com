@@ -1,156 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Simplepxcreate – Responsive Multipurpose - Ecommerce Bootstrap Template</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link href="css/style.css" rel="stylesheet">
-
-<link href="css/prettyPhoto.css" rel="stylesheet" media="screen">
-<link href="css/portfolio.css" rel="stylesheet">
-<link rel="stylesheet" href="layerslider/css/layerslider.css" type="text/css">
-<link rel="stylesheet" href="layerslider/css/layersliderstyle.css" type="text/css">
-
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-<!-- fav -->
-<link rel="shortcut icon" href="assets/ico/favicon.ico">
-</head>
-<body>
-<!-- Header Start -->
-<header>
-<!-- connecting and selecting all from the database -->
 <?php
-$con = mysql_connect("sulley.cah.ucf.edu","USERNAME","PASSWORD");
-if (!$con) {
-die("Can not Connect: " . mysql_error());
+if((isset($_POST['view'])&&($_POST['view']))||(isset($_POST['sort'])&&($_POST['sort']))){
+	header("location:catalog.php?page=1");
 }
+if(isset($_SESSION['page'])){
+                        $sort=$_SESSION['page'];
+                    }
 
-mysql_select_db("ju655443",$con);
-$sql = 'SELECT * FROM products WHERE featured = "yes"';
-$new = 'SELECT * FROM products WHERE new = "yes"';
-$all = 'SELECT * FROM products';
-$myData = mysql_query($sql,$con);
-$myNew = mysql_query($new,$con);
-$myAll = mysql_query($all,$con);
-?>  
-    <div class="headerstrip">
-        <div class="container">
-            <a class="logo pull-left" href="home.php"><img title="BatchPad" alt="BatchPad" src="img/logo.png"></a>
-            <!-- Top Nav Start -->
-            <div class="pull-right">
-                <div class="navbar" id="topnav">
-                    <div class="navbar-inner">
-                    	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
-          						<div class="modal-dialog">
-            						<div class="modal-content">
-              							<div class="modal-header">
-                							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                							<h4 class="modal-title">Please Sign-in</h4>
-              							</div>
-              							<!-- contents of Sign-in modal -->
-              							<div class="modal-body"> 
-              								<div class="form-group">
-                    							<label class="control-label" >Username<span class="red">*</span></label>
-                    							<div class="controls">
-                      								<input type="text" class=""  value="">
-                    							</div>
-                  							</div>
-                  							<div class="form-group">
-                    							<label class="control-label" >Password<span class="red">*</span></label>
-                    							<div class="controls">
-                      								<input type="text" class=""  value="">
-                    							</div>
-                  							</div>
-              							</div>
-              							<div class="modal-footer">
-                							<button type="button" class="btn btn-orange" data-dismiss="modal">Cancel</button>
-                							<button type="button" class="btn btn-primary">Sign-in</button>
-              							</div>
-            						</div>
-            						<!-- /.modal-content --> 
-          						</div>
-          						<!-- /.modal-dialog --> 
-        					</div>
-        					<!-- /.modal -->
-                            <ul class="nav" >
-                        		<li class="text-nopad text-center"><a href="register.php">Sign-up</a></li>
-                            	<li class="text-nopad"><p>or</p></li>
-                        		<li class="text-nopad"><a href="#myModal" data-toggle="modal"> &nbsp; login</a></li>
-                            	<li class="dropdown hover carticon "> <a href="cart.php" class="dropdown-toggle" > <i class="icon-shopping-cart font18"></i> Shopping Cart <span class="label label-orange font14">2 item(s)</span> - $1,790.00 <b class="caret"></b></a>
-                        	<ul class="dropdown-menu topcartopen ">
-                            <li>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="image"><a href="product.php"><img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product"></a></td>
-                                            <td class="name"><a href="product.php">product goes here</a></td>
-                                            <td class="quantity">x&nbsp;1</td>
-                                            <td class="total">$589.50</td>
-                                            <td class="remove"><i class="icon-remove"></i></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="image"><a href="product.php"><img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product"></a></td>
-                                            <td class="name"><a href="product.php">product goes here</a></td>
-                                            <td class="quantity">x&nbsp;1</td>
-                                            <td class="total">$589.50</td>
-                                            <td class="remove"><i class="icon-remove "></i></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="textright"><b>Sub-Total:</b></td>
-                                            <td class="textright">$1.7900.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="textright"><b>Tax (6.00%):</b></td>
-                                            <td class="textright">$123.20</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="textright"><b>Total:</b></td>
-                                            <td class="textright">$1,813.20</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div class="well pull-right buttonwrap"> <a class="btn btn-orange" href="cart.php">View Cart</a></div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- Top Nav End -->
-        </div>
-    </div>
-    <div id="categorymenu">
-        <nav class="subnav">
-            <ul class="nav-pills categorymenu container">
-                <li><a href="home.php"><i class="icon-home icon-white font18"></i> <span> Home</span></a></li>
-                <li><a href="catalog.php">Shop</a></li>
-                <li><a href="about.php">about</a></li>
-                <li><a href="contact.php">Contact Us</a> </li>
-                <li class="pull-right">
-                	<form action="search.php" method="get" class="form-search top-search">
-                    	<input type="text" class="input-small search-query" placeholder="Search Here…">
-                    	<button class="btn btn-orange btn-small tooltip-test" data-original-title="Search"><i class="icon-search icon-white"></i></button>
-                    </form>
-                </li>
-            </ul>
-        </nav>
-    </div>   
-</header>
+                    else{$_SESSION['page']='1';
+					
+					}
+include("db_connect.php");
+include("header.php");
 
-<!-- Header End -->
+$current_url = urlencode($url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+
+?>
+<!--Search Results Product Selection-->
+	<?php
+		include ("db_connect.php");
+		
+		$output = '';
+		if(isset($_POST['search'])){
+			$searchq = $_POST['search'];
+
+			$query = $mysqli->query("SELECT * FROM products WHERE product_name LIKE '%$searchq%' OR description LIKE '%$searchq%'");
+			$count = mysqli_num_rows($query);
+			if($count == 0){
+				$output = "No results found for \"<b>$searchq</b>\"";
+			}else{
+				
+				while($row = mysqli_fetch_array($query)){
+					$url = $row['image_url'];
+					$name = $row['product_name'];
+					$desc = $row['description'];
+					$id = $row['product_id'];
+					$price = $row['price'];
+					
+					$output .= '<li><div class="thumbnail">
+								<div class="row"><div class="col-lg-4 col-md-4 col-xs-12 col-sm-6 span3"><a href="product.php?id='.$id.'"><img alt="" src="' . $url. '"></a> </div>
+								<div class="col-lg-6 col-md-6 col-xs-12 col-sm-12"><h4 class="search_title"><a class="prodcutname" href="product.php?id='.$id.'">' .$name. '</a></h4>
+								<div class="productdiscrption">' .$desc. '<br></div>
+								<div class="price">
+								<div class="pricenew">' .$price. '</div>
+								<div class="ratingstar">
+								<div class="rw-ui-container" data-urid="' . $id. '"></div>
+                              	</div>
+                                <a  class="btn btn-orange btn-large addtocartbutton pull-left">Add to Cart</a>
+                            	</div>					
+								</div>
+									
+								</div>    
+								</div>
+								</li>';
+				
+				
+				}
+			}
+		}	
+	?> 
+<div id="categorymenu">
+  <nav class="subnav">
+    <ul class="nav-pills categorymenu container">
+      <li><a class="home" href="home.php"><i class="icon-home icon-white font18"></i> <span> Home</span></a></li>
+      <li><a class="active" href="catalog.php">Shop</a></li>
+      <li><a href="about.php">about</a></li>
+      <li><a href="contact.php">Contact Us</a> </li>
+      <?php
+        if(isset($_SESSION['logged_in_user_access'])&&($_SESSION['logged_in_user_access'] == "admin")) {
+          print "<li><a href='admin.php'>Admin</a> </li>";
+        }
+      ?>
+      <li class="pull-right">
+       	<form method="post" action="search.php" class="form-search top-search">
+           	<input type="text" name="search" class="input-small search-query" placeholder="Search Here…">
+           	<button class="btn btn-orange btn-small tooltip-test" data-original-title="Search"><i class="icon-search icon-white"></i></button>
+        </form>
+      </li>
+    </ul>
+  </nav>
+</div>   
 
 <div id="maincontainer">
   <section id="product">
@@ -158,7 +86,7 @@ $myAll = mysql_query($all,$con);
       <!--  breadcrumb -->
       <ul class="breadcrumb">
         <li> <a href="home.php">Home</a> <span class="divider">/</span> </li>
-        <li class="active">Search Results</li>
+        <li class="active">Shop</li>
       </ul>
       <div class="row"> 
         <!-- Sidebar Start--> 
@@ -170,122 +98,43 @@ $myAll = mysql_query($all,$con);
             <ul class="nav nav-list categories">
               <li> <a href="category.php">Furniture</a>
                 <ul>
-                  <li> <a href="category.php">Kitchen </a> </li>
-                  <li> <a href="category.php">Outdoor </a> </li>
-                  <li> <a href="category.php">Living Room</a> </li>
-                  <li> <a href="category.php">Bed &amp; Bath</a> </li>
+                  <li> <a href="catalog.php">Kitchen </a> </li>
+                  <li> <a href="catalog.php">Outdoor </a> </li>
+                  <li> <a href="catalog.php">Living Room</a> </li>
+                  <li> <a href="catalog.php">Bed &amp; Bath</a> </li>
                 </ul>
               </li>
-              <li> <a href="category.php">Kitchen</a> </li>
-              <li> <a href="category.php">Electronics </a> </li>
-              <li> <a href="category.php">Bathroom </a> </li>
-              <li> <a href="category.php">Outdoor</a> </li>
-              <li> <a href="category.php">Living Room</a> </li>
-              <li> <a href="category.php">Miscellanious</a> </li>
+              <li> <a href="catalog.php">Kitchen</a> </li>
+              <li> <a href="catalog.php">Electronics </a> </li>
+              <li> <a href="catalog.php">Bathroom </a> </li>
+              <li> <a href="catalog.php">Outdoor</a> </li>
+              <li> <a href="catalog.php">Living Room</a> </li>
+              <li> <a href="catalog.php">Miscellanious</a> </li>
             </ul>
-          </div>
-          <!-- Latest Product -->
-          <div class="sidewidt">
-            <h1 class="heading1"><span class="maintext"><i class="icon-trophy"></i> related Products</span></h1>
-            <ul class="bestseller">
-              <li> <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product"> <a class="productname" href="product.php"> Product Name</a> <span class="price">$250</span>
-                <div class="ratingstar"> <i class="icon-star"> </i><i class="icon-star"> </i><i class="icon-star"> </i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i></div>
-              </li>
-              <li> <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product"> <a class="productname" href="product.php"> Product Name</a> <span class="price">$250</span> <i class="icon-star"> </i><i class="icon-star"> </i><i class="icon-star"> </i> <i class="icon-star-empty"></i> <i class="icon-star-empty"></i></li>
-            </ul>
-          </div>
-          <!--  Best Seller -->
-          <div class="sidewidt">
-            <h1 class="heading1"><span class="maintext"><i class="icon-bookmark"></i> Featured</span></h1>
-            <ul class="bestseller">
-              <li> <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product"> <a class="productname" href="product.php"> Product Name</a> <span class="procategory">Women Accessories</span> <span class="price">$250</span> </li>
-              <li> <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product"> <a class="productname" href="product.php"> Product Name</a> <span class="procategory">Electronics</span> <span class="price">$250</span> </li>
-            </ul>
-          </div>
-          
-          <!--  Newsletters -->
-          
-          <div class="sidewidt">
-            <h1 class="heading1"><span class="maintext"><i class="icon-pencil"></i> Newsletters</span></h1>
-            <section id="newslettersignup">
-              <div class="pull-left mt20">
-                <form class="form-horizontal">
-                  <div class="input-prepend">
-                    <input type="text" placeholder="Subscribe to Newsletter" id="inputIcon" class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
-                    <input value="Subscribe" class="btn btn-orange" type="submit">
-                    Sign in </div>
-                </form>
-              </div>
-            </section>
           </div>
         </aside>
+        <!-- Sidebar End-->
+		    <!-- Category End-->
         
-        <!-- Sidebar End--> 
-        <!-- Category-->
-        <div class="col-lg-9 col-md-9 col-xs-12 col-sm-12"> 
+        <div class="col-lg-9 col-md-9 col-xs-12 col-sm-12">	 
           <!-- Category Products-->
           <section id="category">
-                <h1 class="heading1"><span class="maintext"> <i class="icon-search"></i> Search Results</span></h1>
+            <h1 class="heading1"><span class="maintext">Search Results</span></h1>
             <div class="row">
-              <div class=""> 
-                <!-- Sorting-->
-                <div class="sorting well">
-                  <form class=" form-inline pull-left">
-                    Sort By :
-                    <select class="span2">
-                      <option>Relevance</option>
-                      <option>High Price</option>
-                      <option>Low Price</option>
-                      <option>Rating</option>
-                    </select>
-                    &nbsp;&nbsp;
-                    Show:
-                    <select class="span1">
-                      <option>10</option>
-                      <option>15</option>
-                      <option>20</option>
-                      <option>25</option>
-                      <option>30</option>
-                    </select>
-                  </form>
-                </div>              
+			</div>
+         <!-- sort by and view number of items div END -->            
                 <!-- Category-->
                 <section id="categorygrid">
                   <ul class="thumbnails list row" style="display:block" >
-                  <?php
-                        while($row = mysql_fetch_array($myAll)){
-				  ?>
-                    <li>
-                      <div class="thumbnail">
-                        <div class="row">
-						<?php echo "<div class='col-lg-4 col-md-4 col-xs-12 col-sm-6 span3'><a href='product.php'><img alt='' src=" . $row['image_url'] . "></a> </div>";
-                              echo "<div class='col-lg-6 col-md-6 col-xs-12 col-sm-12'><a class='prdocutname' href='product.php'>" . $row['product_name'] . "</a>";
-                              echo "<div class='productdiscrption'>" . $row['description'] . "<br></div>";
-                              echo "<div class='price'>";
-                              echo "<div class='pricenew'>" . $row['price'] . "</div>";
-                              echo "<div class='ratingstar'>";
-                              echo "<div class='rw-ui-container' data-urid=" . $row['product_id'] . "></div>"; ?>
-                              		</div>
-                                    <a  class='btn btn-orange btn-large addtocartbutton pull-left'>Add to Cart</a>
-                            	</div>					
-                            </div>
-                            
-                          </div>
-                         
-                        </div>
-                    </li>
-                   <?php } ?>
+				  
+					<!--Outputting search results-->
+					<div class="results">
+						<?php
+							echo "Results found for \"<b>$searchq</b>\":";
+							print("$output");
+						?> 
+					</div>				  
                   </ul>
-                  <div class="pull-right">
-                    <ul class="pagination">
-                      <li><a href="#">Prev</a> </li>
-                      <li class="active"> <a href="#">1</a> </li>
-                      <li><a href="#">2</a> </li>
-                      <li><a href="#">3</a> </li>
-                      <li><a href="#">4</a> </li>
-                      <li><a href="#">Next</a> </li>
-                    </ul>
-                  </div>
                 </section>
               </div>
             </div>
@@ -432,7 +281,20 @@ $myAll = mysql_query($all,$con);
     rw.id = id; rw.async = true; rw.type = "text/javascript";
     rw.src = p + "//" + a + "external" + f + ".js?ck=" + ck;
     s.parentNode.insertBefore(rw, s);
-    }(document, new Date(), "script", "rating-widget.com/"));</script>
+    }(document, new Date(), "script", "rating-widget.com/"));
+    
+	
+	function change(){
+    	document.getElementById("view_form").submit();
+		
+	}
+
+	function change2(){
+    	document.getElementById("sort_form").submit();
+		
+	}
+    
+    </script>
 <?php
 mysql_close($con);
 ?>
