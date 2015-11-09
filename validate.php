@@ -51,11 +51,6 @@ function validateData(event){
 	var email_valid = false;
 	var telephone_valid = false;
 	var mobile_valid = false;
-	var radio = false;
-	var radio2 = false;
-	var radio3 = false;
-	var radio4 = false;
-	var radio5 = false;
 	
 	//first name check
 	document.register.firstname.onblur = function (){	
