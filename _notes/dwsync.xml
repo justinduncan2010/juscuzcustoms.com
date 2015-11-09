@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="search.php" server="C:/xampp/htdocs/" local="130892177893557786" remote="130892177890000000" Dst="1" />
+<file name="search.php" server="C:/xampp/htdocs/" local="130915541978899189" remote="130915541970000000" Dst="1" />
 <file name="catalog.php" server="C:/xampp/htdocs/" local="130909480865945458" remote="130909480860000000" Dst="1" />
-<file name="header.php" server="C:/xampp/htdocs/" local="130912042359720180" remote="130912042350000000" Dst="1" />
-<file name="db_connect.php" server="C:/xampp/htdocs/" local="130911394150641439" remote="130911394150000000" Dst="1" />
+<file name="header.php" server="C:/xampp/htdocs/" local="130915590946576224" remote="130915590940000000" Dst="1" />
+<file name="db_connect.php" server="C:/xampp/htdocs/" local="130915558429752227" remote="130915558420000000" Dst="1" />
 <file name="footer.php" server="C:/xampp/htdocs/" local="130909476194412724" remote="130909476190000000" Dst="1" />
 <file name="home.php" server="C:/xampp/htdocs/" local="130909503879161738" remote="130909503870000000" Dst="1" />
 <file name="product.php" server="C:/xampp/htdocs/" local="130909503870461241" remote="130909503870000000" Dst="1" />
 <file name="logout.php" server="C:/xampp/htdocs/" local="130909476194462726" remote="130909476190000000" Dst="1" />
-<file name="admin.php" server="C:/xampp/htdocs/" local="130912293902397797" remote="130912293900000000" Dst="1" />
+<file name="admin.php" server="C:/xampp/htdocs/" local="130915593167678019" remote="130915593160000000" Dst="1" />
 <file name="client.php" server="C:/xampp/htdocs/" local="130909536714759827" remote="130909536710000000" Dst="1" />
 <file name="delete.php" server="C:/xampp/htdocs/" local="130909728091425946" remote="130909728090000000" Dst="1" />
 <file name="insertproduct.php" server="C:/xampp/htdocs/" local="130909789986276129" remote="130909789980000000" Dst="1" />
@@ -28,4 +28,6 @@
 <file name="footer.php" server="C:/xampp/htdocs/e-commerce1/juscuzcustoms.com/" local="130906108504738050" remote="130906108500000000" Dst="1" />
 <file name="admin.php" server="C:/xampp/htdocs/e-commerce1/juscuzcustoms.com/" local="130912293902397797" remote="130912293900000000" Dst="1" />
 <file name="logout.php" server="C:/xampp/htdocs/e-commerce1/juscuzcustoms.com/" local="130912293902567807" remote="130912293900000000" Dst="1" />
+<file name="about.php" server="C:/xampp/htdocs/" local="130915590948106228" remote="130915590940000000" Dst="1" />
+<file name="login.php" server="C:/xampp/htdocs/" local="130915589800215714" remote="130915589800000000" Dst="1" />
 </dwsync>

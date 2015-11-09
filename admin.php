@@ -1,6 +1,8 @@
 <?php
+$pageTitle = 'Batchpad.com - Admin';
 include("db_connect.php");
 include("header.php");
+$_SESSION['url'] = $_SERVER['REQUEST_URI'];
 
 	if(!isset($_SESSION['logged_in']) || ($_SESSION['logged_in_user_access'] != 'admin')) {
 		?>
@@ -35,6 +37,9 @@ include("header.php");
                 <?php
                 if(isset($_SESSION['logged_in_user_access'])&&($_SESSION['logged_in_user_access'] == "admin")) {
                 print "<li><a class='active' href='admin.php'>Admin</a> </li>";
+                }
+				if(isset($_SESSION['logged_in_user_access'])&&($_SESSION['logged_in_user_access'] == "customer")) {
+                print "<li><a class='active' href='client.php'>My Account</a> </li>";
                 }
                 ?>
                 <li class="pull-right">
