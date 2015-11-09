@@ -10,13 +10,13 @@
 function focus(){	
 
 document.register.firstname.onfocus = function(){
-	var first = document.getElementById('first');
+	var first = document.getElementById('firstname');
 	var hint1 = document.getElementById('hint1');	
 	hint1.innerText = "alpha-numeric characters only";
 	hint1.style.color = "green";
 	}
 document.register.lastname.onfocus = function(){
-	var last = document.getElementById("last");
+	var last = document.getElementById("lastname");
 	var hint2 = document.getElementById('hint2');
 	hint2.style.color = "green";
 	hint2.innerText = "alpha-numeric characters only";
@@ -51,26 +51,23 @@ function validateData(event){
 	var email_valid = false;
 	var telephone_valid = false;
 	var mobile_valid = false;
-	var radio = false;
-	var radio2 = false;
-	var radio3 = false;
-	var radio4 = false;
-	var radio5 = false;
+
 	
 	//first name check
 	document.register.firstname.onblur = function (){	
 	if(this.value.match(/^[A-Za-z]*$/)){
 		hint1.innerText = "";
-		var check = document.createElement('img');
-		check.setAttribute('src',"img/check.png");
-      	hint1.appendChild(check);
+		var check = document.createElement('i');
+		check.setAttribute('class',"icon-ok green");
+		hint1.appendChild(check);
 		first_name_valid = true;
 	}
 	if(!this.value.match(/^[A-Za-z]*$/) || this.value.length === 0){
 		hint1.innerText = "";
-		var check = document.createElement('img');
-		check.setAttribute('src',"img/ex.png");
+		var check = document.createElement('i');
+		check.setAttribute('class',"icon-remove red");
 		hint1.appendChild(check);
+		first_name_valid = false;
 
 	}
 	}
@@ -78,32 +75,34 @@ function validateData(event){
 	document.register.lastname.onblur = function(){	
 	if(this.value.match(/^[A-Za-z]*$/)){
 		hint2.innerText = "";
-		var check = document.createElement('img');
-		check.setAttribute('src',"img/check.png");
+		var check = document.createElement('i');
+		check.setAttribute('class',"icon-ok green");
 		hint2.appendChild(check);
 		last_name_valid = true;
 	}
 	if(!this.value.match(/^[A-Za-z]*$/) || this.value.length === 0){
 		hint2.innerText = "";
-		var check = document.createElement('img');
-		check.setAttribute('src',"img/ex.png");
+		var check = document.createElement('i');
+		check.setAttribute('class',"icon-remove red");
 		hint2.appendChild(check);
+		last_name_valid = false;
 	}
 	}
 	//phone number check
 	document.register.telephone.onblur = function(){	
-	if(this.value.match(/^([0-9]{3})(-)([0-9]{3})(-)([0-9]{4})$/)){
+	if(this.value.match(/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/)){
 		hint3.innerText = "";
-		var check = document.createElement('img');
-		check.setAttribute('src',"img/check.png");
+		var check = document.createElement('i');
+		check.setAttribute('class',"icon-ok green");
 		hint3.appendChild(check);
-		phone_valid = true;
+		telephone_valid = true;
 	}
-	if(!this.value.match(/^([0-9]{3})(-)([0-9]{3})(-)([0-9]{4})$/) || this.value.length === 0){
+	if(!this.value.match(/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/) || this.value.length === 0){
 		hint3.innerText = "";
-		var check = document.createElement('img');
-		check.setAttribute('src',"img/ex.png");
+		var check = document.createElement('i');
+		check.setAttribute('class',"icon-remove red");
 		hint3.appendChild(check);
+		telephone_valid = false;
 
 	}
 	}
@@ -112,34 +111,37 @@ function validateData(event){
 	document.register.email.onblur = function(){
 	if(this.value.match(/^([A-Za-z0-9]+)(@)([A-Za-z0-9]+)(.)([a-z]+)$/)){
 		hint4.innerText = "";
-		var check = document.createElement('img');
-		check.setAttribute('src',"img/check.png");
+		var check = document.createElement('i');
+		check.setAttribute('class',"icon-ok green");
 		hint4.appendChild(check);
 		email_valid = true;
 		
 	}
 	if(!this.value.match(/^([A-Za-z0-9]+)(@)([A-Za-z0-9]+)(.)([a-z]+)$/) || this.value.length === 0){
 		hint4.innerText = "";
-		var check = document.createElement('img');
-		check.setAttribute('src',"img/ex.png");
+		var check = document.createElement('i');
+		check.setAttribute('class',"icon-remove red");
 		hint4.appendChild(check);
+		email_valid = false;
 		
 	}
 	}
 	//mobile number check
 	document.register.mobile.onblur = function(){	
-	if(this.value.match(/^([0-9]{3})(-)([0-9]{3})(-)([0-9]{4})$/)){
+	if(this.value.match(/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/)){
 		hint5.innerText = "";
-		var check = document.createElement('img');
-		check.setAttribute('src',"img/check.png");
-		hint3.appendChild(check);
-		phone_valid = true;
+		var check = document.createElement('i');
+		check.setAttribute('class',"icon-ok green");
+		hint5.appendChild(check);
+		mobile_valid = true;
 	}
-	if(!this.value.match(/^([0-9]{3})(-)([0-9]{3})(-)([0-9]{4})$/) || this.value.length === 0){
+	if(!this.value.match(/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/) || this.value.length === 0){
 		hint5.innerText = "";
-		var check = document.createElement('img');
-		check.setAttribute('src',"img/ex.png");
-		hint3.appendChild(check);
+		var check = document.createElement('i');
+		check.setAttribute('class',"icon-remove red");
+		hint5.appendChild(check);
+		mobile_valid = false;
+		
 
 	}
 	}
@@ -148,26 +150,32 @@ checks.addEventListener('click',checkbox(),true);
 	function checkbox(){
 	            if(checks.checked) {
 
-					document.getElementById("button").disabled = false;
+					document.getElementById("registerbtn").disabled = false;
                 }else{
-					document.getElementById("button").disabled = true;
+					document.getElementById("registerbtn").disabled = true;
+					$('#register').on('keyup keypress', function(e) {
+  					var code = e.keyCode || e.which;
+  					if (code == 13) { 
+    				e.preventDefault();
+    				return false;
+  				}
+			});
 				}
 	}
+
 	//validating the for data after submit
-	function validateForm(first_name_valid, last_name_valid, email_valid, phone_valid, mobile_valid){
-		if(first_name_valid && last_name_valid && email_valid && phone_valid && mobile_valid){
-			 	
-		return false;		 
+	function validateForm(first_name_valid, last_name_valid, email_valid, telephone_valid, mobile_valid){
+		if(first_name_valid && last_name_valid && email_valid && telephone_valid && mobile_valid){
+			alert("Success"); 			 
 		}
 		else{
-		alert("Please fill out the entire form!");
+			alert("Please fill out the entire form!");
 		return false;
 		}
+
 	}
-                document.getElementById('button').onclick = function() {
-					validateForm(first_name_valid, last_name_valid, email_valid, phone_valid, sulley_valid,radio,radio2,radio3,radio4,radio5);
-                    return false;
-                }
+	var submitbtn = document.getElementById('registerbtn');
+	submitbtn.addEventListener('click',validateForm(),false);
 }
 			               
         
