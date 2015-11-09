@@ -1,4 +1,5 @@
 <?php
+	$pageTitle = 'Batchpad.com - Home';
   include('header.php');
   include('db_connect.php');
 ?>

@@ -2,8 +2,6 @@
 $pageTitle = 'Batchpad.com - Admin';
 include("db_connect.php");
 include("header.php");
-$_SESSION['url'] = $_SERVER['REQUEST_URI'];
-
 	if(!isset($_SESSION['logged_in']) || ($_SESSION['logged_in_user_access'] != 'admin')) {
 		?>
             <div id="categorymenu">
