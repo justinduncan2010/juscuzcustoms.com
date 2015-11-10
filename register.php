@@ -38,43 +38,43 @@
                 <div class="control-group">
                   <label for="first" class="control-label"><span class="red">*</span> First Name</label>
                   <div class="controls">
-                    <input required name="firstname" id="firstname" type="text"  class="">
+                    <input required name="firstname" maxlength="20" id="firstname" type="text"  class="">
                     <span id="hint1"></span>
                   </div>
                 </div>
                 <div class="control-group">
                   <label for="last" class="control-label"><span class="red">*</span> Last Name</label>
                   <div class="controls">
-                    <input required name="lastname" type="text" id="latname"  class="">
+                    <input required name="lastname" maxlength="20" type="text" id="lastname"  class="">
                   <span id="hint2"></span>
                   </div>
                 </div>
                 <div class="control-group">
-                  <label for="email" class="control-label"> E-mail Address</label>
+                  <label for="email" class="control-label"><span class="red">*</span> E-mail Address</label>
                   <div class="controls">
-                    <input name="email" type="email" id="email" class="">
+                    <input name="email" required maxlength="36" type="email" id="email" class="">
                   <span id="hint3"></span>
                   </div>
                 </div>
                 <div class="control-group">
                   <label for="telephone" class="control-label"> Telephone</label>
                   <div class="controls">
-                    <input name="telephone" type="number" id="telephone"  class="">
+                    <input name="telephone" required maxlength="10" type="text" id="telephone">
                   <span id="hint4"></span>
                   </div>
                 </div>
                 <div class="control-group">
-                  <label for="mobile" class="control-label"> Mobile</label>
+                  <label for="mobile" class="control-label"> Mobile </label>
                   <div class="controls">
-                    <input name="mobile" type="number" id="mobile"  class="">
+                    <input name="mobile" maxlength="10" type="text" id="mobile">
                     <span id="hint5"></span>
                   </div>
                   
                 </div>
                 <div class="control-group">
-                	<label for="company" class="control-label"> Company</label>
+                	<label for="company" class="control-label"> Company (optional)</label>
                 <div class="controls">
-                    <input name="company" type="text" id="company"  class="">
+                    <input name="company" maxlength="20" type="text" id="company"  class="">
                 </div>
                 </div>
               </fieldset>
@@ -85,31 +85,36 @@
               <div class="control-group">
                   <label for="address1" class="control-label"> Address1</label>
                   <div class="controls">
-                    <input name="address1" type="text"  class="">
+                    <input name="address1" maxlength="64" type="text" id="address1"  class="">
+                    <span id="hint6"></span>
                   </div>
                 </div>
                 <div class="control-group">
                   <label for="address2" class="control-label"> Address2</label>
                   <div class="controls">
-                    <input name="address2" type="text"  class="">
+                    <input name="address2" maxlength="64" type="text" id="address2">
+                    <span id="hint7"></span>
                   </div>
                 </div>
                 <div class="control-group">
                   <label for="city" class="control-label"> City</label>
                   <div class="controls">
-                    <input name="city" type="text"  class="">
+                    <input name="city" maxlength="24" type="text" id="city">
+                  	<span id="hint8"></span>
                   </div>
                 </div>
                 <div class="control-group">
                     <label for="state" class="control-label"> State</label>
                 <div class="controls">
-                    <input name="state" type="text"  class="">
+                    <input name="state" type="text" maxlength="2" id="state">
+                    <span id="hint9"></span>
                 </div>
                 </div>
                 <div class="control-group">
                 	<label for="zip" class="control-label"> Zip</label>
                 <div class="controls">
-                    <input name="zip" type="text"  class="">
+                    <input name="zip" maxlength="5" type="text" id="zip">
+                    <span id="hint10"></span>
                 </div>
                 </div>  
               </fieldset>
@@ -120,19 +125,22 @@
               <div class="control-group">
                   <label for="username" class="control-label"><span class="red">*</span> Username</label>
                   <div class="controls">
-                    <input name="username" type="text"  class="">
+                    <input required name="username" type="text" id="username">
+                    <span id="hint11"></span>
                   </div>
                 </div>
                 <div class="control-group">
-                  <label for="password" class="control-label"><span class="red">*</span> Password</label>
+                  <label for="pw1" class="control-label"><span class="red">*</span> Password</label>
                   <div class="controls">
-                    <input required name="password" type="password"  class="">
+                    <input required name="pw1" type="password"  class="" id="pw1">
+                    <span id="hint12"></span>
                   </div>
                 </div>
                 <div class="control-group">
-                  <label for="password" class="control-label"><span class="red">*</span>Confirm Password</label>
+                  <label for="pw2" class="control-label"><span class="red">*</span>Confirm Password</label>
                   <div class="controls">
-                    <input required name="password" type="password"  class="">
+                    <input required name="pw2" type="password" id="pw2" onKeyUp="checkPass(); return false;">
+                    <span id="hint13"></span>
                   </div>
                 </div>
               </fieldset>
