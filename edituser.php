@@ -157,7 +157,7 @@ include("header.php");
                 if(isset($_POST['submit'])) {
 				$insert_user_query = "UPDATE users SET username = '".$_POST['username']."', first_name = '".$_POST['first']."', last_name = '".$_POST['last']."', access_level = '".$_POST['access']."', email = '".$_POST['email']."', address1 = '".$_POST['address1']."', address2 = '".$_POST['address2']."', city = '".$_POST['city']."', state = '".$_POST['state']."', zip = '".$_POST['zip']."', telephone = '".$_POST['telephone']."', mobile = '".$_POST['mobile']."', company = '".$_POST['company']."' WHERE user_id = $id";
 				$mysqli->query($insert_user_query);
-				?> <script type="text/javascript"> alert('You have successfully Updated Your Information'); window.location = "admin.php";</script>
+				?> <script type="text/javascript"> alert('You have successfully Updated Your Information'); window.location = "client.php";</script>
                 <?php } ?>
               <input class="btn btn-orange" name="submit" id="submit" type="submit" value="Update Information" />
               <input action="action" type="button" class="btn btn-danger" value="Cancel" onclick="window.history.go(-1); return false;" />

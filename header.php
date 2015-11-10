@@ -1,11 +1,11 @@
-<?php 
+<?php
 session_start();
-include ('db_connect.php');
+include('db_connect.php'); 
 ?>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title><?php print stripslashes($_SERVER["PHP_SELF"]); ?></title>
+<title><?php echo $pageTitle ?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="Justin Duncan">
@@ -17,7 +17,6 @@ include ('db_connect.php');
 <link href="css/portfolio.css" rel="stylesheet">
 <link rel="stylesheet" href="layerslider/css/layerslider.css" type="text/css">
 <link rel="stylesheet" href="layerslider/css/layersliderstyle.css" type="text/css">
-
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,80 +32,6 @@ include ('db_connect.php');
             <div class="pull-right">
                 <div class="navbar" id="topnav">
                     <div class="navbar-inner">
-                    <!-- Sign-in Modal popup window -->
-                    	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
-          						<div class="modal-dialog">
-            						<div class="modal-content">
-              							<div class="modal-header">
-                							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                							<h4 class="modal-title">Please Sign-in</h4>
-              							</div>
-              							<!-- contents of Sign-in modal -->
-              							<div class="modal-body"> 
-              								<div class="form-group">
-                                            	<form method="post" action="">
-                    							<label class="control-label" >Username<span class="red">&nbsp;*</span></label>
-                    							<div class="controls">
-                      								<input name="username" id="username" type="text" placeholder="Username or Email"/>
-                    							</div>
-                  							</div>
-                  							<div class="form-group">
-                    							<label class="control-label" >Password<span class="red">&nbsp;*</span></label>
-                    							<div class="controls">
-                      								<input name="password" id="password" type="password" placeholder="Password"/>
-                    							</div>
-                  							</div>
-              							</div>
-              							<div class="modal-footer">
-                                        <?php 
-											if(isset($_POST['submit']) && (!isset($_SESSION['logged_in']))) {
-										// query to select all users/passwords
-											$select_users = "SELECT * FROM users";
-											$select_users_result = $mysqli->query($select_users);
-											
-										if($mysqli->error) {
-												print "Select query error!  Message: ".$mysqli->error;
-											}
-										
-											while($row = $select_users_result->fetch_object()) {
-												if ((($_POST['username']) == ($row->username)) && (md5($_POST['password']) == ($row->password))) {
-													// check if user input = a record in the database
-													$_SESSION['logged_in']              = true;
-													$_SESSION['logged_in_user']         = $row->username;
-													$_SESSION['logged_in_firstname']    = $row->first_name;
-													$_SESSION['logged_in_lastname']     = $row->last_name;
-													$_SESSION['logged_in_user_id']      = $row->user_id;
-													$_SESSION['logged_in_user_access']  = $row->access_level;
-													$_SESSION['logged_in_email']        = $row->email;
-													$_SESSION['logged_in_address1']     = $row->address1;
-													$_SESSION['logged_in_address2']     = $row->address2;
-													$_SESSION['logged_in_city']         = $row->city;
-													$_SESSION['logged_in_state']        = $row->state;
-													$_SESSION['logged_in_zip']          = $row->zip;
-													$_SESSION['logged_in_telephone']    = $row->telephone;
-													$_SESSION['logged_in_mobile']       = $row->mobile;
-													$_SESSION['logged_in_company']      = $row->company;
-												}
-												 
-												elseif((($_POST['username']) != ($row->username)) || (md5($_POST['password']) != ($row->password))){
-												
-												?>
-                                                <h4 class="red">Sorry, Invalid username or password</h4>
-												<?php break;
-												}
-											}
-										}
-										?>
-                							<button type="button" class="btn btn-orange" data-dismiss="modal">Cancel</button>
-                                            <input name="submit" id="submit" type="submit" class="btn btn-primary" value="Sign-in" />
-                                            </form>
-              							</div>
-            						</div>
-            						<!-- End of .modal-content --> 
-          						</div>
-          						<!-- End of.modal-dialog --> 
-        					</div>
-        					<!-- End of .modal -->
                         <ul class="nav" >
                         	<?php 
 							if(!isset($_SESSION['logged_in'])) { 
@@ -114,27 +39,15 @@ include ('db_connect.php');
                             
                         	<li class="text-nopad text-center"><a href="register.php">Sign-up</a></li>
                             <li class="text-nopad"><p>or</p></li>
-                        	<li class="text-nopad"><a href="#myModal" data-toggle="modal"> &nbsp; login</a></li>
+                        	<li class="text-nopad"><a href="login.php"> &nbsp; login</a></li>
                             <li class="dropdown hover carticon "> <a href="cart.php" class="dropdown-toggle" > <i class="icon-shopping-cart font18"></i> Shopping Cart <span class="label label-orange font14">2 item(s)</span> - $1,790.00 <b class="caret"></b></a>
                             
                             <?php
-							}else if(($_SESSION['logged_in_user_access'] == "admin")||($_SESSION['logged_in_user_access'] == "superuser")) {
+							}else if(isset($_SESSION['logged_in'])) {
 							print "<li class='text-nopad red'><p>Hello, ".$_SESSION['logged_in_firstname']."!</p></li>"; ?>
                         	<li class="text-nopad"><p> &nbsp; Not you?</p></li>
-                            <li class="text-nopad"><a href="logout.php"> &nbsp; Logout</a></li>
-                            
-                            <?php 
-							}elseif(($_SESSION['logged_in_user_access'] == "customer")){
-							?>
-                            
-							<?php echo "<li class='text-nopad text-center'>Hello".$_SESSION['logged_in_firstname']."!</a></li>"; ?>
-                            <?php echo "<li class='text-nopad'><p>Hello, ".$row->user_firstname."!</p></li>"; ?>
-                        	<li class="text-nopad">Not you?<a href="logout.php"> &nbsp; logout</a></li>
-                            <?php echo '<li class="text-nopad"><a href="client.php?id='.$_SESSION['logged_in_user_id'].'" data-toggle="modal"> &nbsp; Account info</a></li>'; ?>
-                            
-                            <?php
-							}
-                            ?>
+                            <li class="text-nopad"><a href="logout.php"> &nbsp; Logout</a></li>  
+							<?php } ?>
                     </li>
                 </ul>
                     </div>
